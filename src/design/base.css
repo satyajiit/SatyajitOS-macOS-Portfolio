@@ -1,0 +1,84 @@
+@layer base {
+  html,
+  body {
+    height: 100%;
+    overflow: clip;
+    overscroll-behavior: none;
+  }
+
+  html {
+    background-color: var(--wallpaper-fallback);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    letter-spacing: var(--text-body--letter-spacing);
+    color: var(--label);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-synthesis-weight: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #app {
+    height: 100%;
+  }
+
+  /* Headings are always upright; hierarchy comes from size and weight. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-style: normal;
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: var(--selection-text);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 0;
+  }
+
+  /* macOS overlay scrollbars: thin, no track, tinted by appearance */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--label-tertiary) transparent;
+  }
+
+  /* Lucide stands in for SF Symbols; regular weight at UI sizes is ~1.75 */
+  svg.lucide {
+    stroke-width: 1.75;
+  }
+
+  input,
+  textarea {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--label-placeholder);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 150ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 150ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

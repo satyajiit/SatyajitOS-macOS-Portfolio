@@ -1,0 +1,384 @@
+/*
+ * SatyajitOS design tokens
+ * ------------------------------------------------------------------
+ * Three layers, each only allowed to read from the one above it:
+ *
+ *   1. Primitives   Apple's published system colours (HIG), both appearances.
+ *   2. Semantics    What a colour is *for*: label, fill, separator, window,
+ *                   selection, accent. Components use these, never primitives.
+ *   3. Materials    Vibrancy recipes (tint + blur + saturation + edge light),
+ *                   defined in materials.css on top of the semantics.
+ *
+ * Appearance is driven by <html data-appearance="light|dark"> and the accent by
+ * <html data-accent="blue|purple|…">. Both are set by the appearance store; with
+ * no attribute we fall back to the OS preference.
+ *
+ * Colour values are Apple's sRGB values on purpose: the brief is "real macOS
+ * colours", so they are not re-tuned. Label and fill colours are alpha-based
+ * because that is how AppKit/UIKit define them (they tint whatever is behind).
+ */
+
+/* ── 1. Primitives ───────────────────────────────────────────────────────── */
+
+:root {
+  /* macOS system colours. Dark values are the default; light overrides below. */
+  --sys-red: #ff453a;
+  --sys-orange: #ff9f0a;
+  --sys-yellow: #ffd60a;
+  --sys-green: #32d74b;
+  --sys-mint: #66d4cf;
+  --sys-teal: #6ac4dc;
+  --sys-cyan: #5ac8f5;
+  --sys-blue: #0a84ff;
+  --sys-indigo: #5e5ce6;
+  --sys-purple: #bf5af2;
+  --sys-pink: #ff375f;
+  --sys-brown: #ac8e68;
+  --sys-gray: #98989d;
+  --sys-graphite: #8c8c8c;
+
+  --sys-gray-2: #636366;
+  --sys-gray-3: #48484a;
+  --sys-gray-4: #3a3a3c;
+  --sys-gray-5: #2c2c2e;
+  --sys-gray-6: #1c1c1e;
+
+  /* Window controls ("traffic lights"), same in both appearances */
+  --traffic-close: #ff5f57;
+  --traffic-close-edge: #e2463f;
+  --traffic-close-glyph: #4d0000;
+  --traffic-minimize: #febc2e;
+  --traffic-minimize-edge: #e1a116;
+  --traffic-minimize-glyph: #995700;
+  --traffic-zoom: #28c840;
+  --traffic-zoom-edge: #12ac28;
+  --traffic-zoom-glyph: #006500;
+
+  /* Control knobs (switches, sliders) are white in both appearances */
+  --knob: #ffffff;
+  --elev-knob: 0 0 0 0.5px rgb(0 0 0 / 0.06), 0 2px 6px rgb(0 0 0 / 0.22);
+  --elev-knob-hover: 0 0 0 0.5px rgb(0 0 0 / 0.1), 0 2px 8px rgb(0 0 0 / 0.3);
+
+  /* Startup screen: always black with a white mark, like a Mac booting */
+  --boot-bg: #000000;
+  --boot-fg: #ffffff;
+  --boot-track: rgb(255 255 255 / 0.22);
+  --boot-fill: rgb(255 255 255 / 0.92);
+
+  /* Brand: the bolt. It is Apple's orange, so it sits inside the system. */
+  --brand: var(--sys-orange);
+
+  /* Terminal.app "Basic" profile, which stays dark in both appearances */
+  --term-bg: #1e1e1e;
+  --term-fg: #e6e6e6;
+  --term-dim: #8a8a8a;
+  --term-green: #32d74b;
+  --term-blue: #64b5ff;
+  --term-yellow: #ffd60a;
+  --term-red: #ff6961;
+  --term-magenta: #da8fff;
+  --term-cyan: #70d7ff;
+  --term-cursor: #b0b0b0;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+/* Light primitive overrides (Apple ships darker, deeper variants for light) */
+:root[data-appearance='light'] {
+  --sys-red: #ff3b30;
+  --sys-orange: #ff9500;
+  --sys-yellow: #ffcc00;
+  --sys-green: #28cd41;
+  --sys-mint: #00c7be;
+  --sys-teal: #59adc4;
+  --sys-cyan: #55bef0;
+  --sys-blue: #007aff;
+  --sys-indigo: #5856d6;
+  --sys-purple: #af52de;
+  --sys-pink: #ff2d55;
+  --sys-brown: #a2845e;
+  --sys-gray: #8e8e93;
+  --sys-graphite: #8c8c8c;
+
+  --sys-gray-2: #aeaeb2;
+  --sys-gray-3: #c7c7cc;
+  --sys-gray-4: #d1d1d6;
+  --sys-gray-5: #e5e5ea;
+  --sys-gray-6: #f2f2f7;
+}
+
+/* ── 2. Semantics: light ─────────────────────────────────────────────────── */
+
+:root[data-appearance='light'] {
+  color-scheme: light;
+
+  /* Text */
+  --label: rgb(0 0 0 / 0.85);
+  --label-secondary: rgb(0 0 0 / 0.5);
+  --label-tertiary: rgb(0 0 0 / 0.26);
+  --label-quaternary: rgb(0 0 0 / 0.1);
+  --label-on-accent: #ffffff;
+  --label-placeholder: rgb(0 0 0 / 0.25);
+  --link: #0068da;
+
+  /* Fills for controls (macOS 14 system fills) */
+  --fill: rgb(0 0 0 / 0.1);
+  --fill-secondary: rgb(0 0 0 / 0.08);
+  --fill-tertiary: rgb(0 0 0 / 0.05);
+  --fill-quaternary: rgb(0 0 0 / 0.03);
+  --control: #ffffff;
+  --control-pressed: #f0f0f0;
+
+  /* Lines */
+  --separator: rgb(0 0 0 / 0.1);
+  --separator-opaque: #e5e5e5;
+  --grid: #e6e6e6;
+
+  /* Surfaces */
+  --window: #ececec;
+  --window-content: #ffffff;
+  --window-toolbar: #f6f6f6;
+  --window-edge: rgb(0 0 0 / 0.22);
+  --window-edge-highlight: rgb(255 255 255 / 0);
+  --under-page: #d6d6d6;
+  --text-background: #ffffff;
+  --row-alternate: rgb(0 0 0 / 0.03);
+
+  /* Selection */
+  --selection: #0063e1;
+  --selection-unemphasized: #dcdcdc;
+  --selection-text: #b3d7ff;
+  --highlight-find: #ffff00;
+
+  /* Window controls when the window is not key */
+  --traffic-inactive: #d6d6d6;
+  --traffic-inactive-edge: #c4c4c4;
+
+  /* Shadows */
+  --elev-window: 0 0 0 0.5px var(--window-edge), 0 22px 60px 2px rgb(0 0 0 / 0.22),
+    0 6px 18px rgb(0 0 0 / 0.1);
+  --elev-window-inactive: 0 0 0 0.5px rgb(0 0 0 / 0.14), 0 10px 32px rgb(0 0 0 / 0.14);
+  --elev-menu: 0 0 0 0.5px rgb(0 0 0 / 0.16), 0 10px 32px rgb(0 0 0 / 0.18),
+    0 2px 6px rgb(0 0 0 / 0.08);
+  --elev-popover: var(--elev-menu);
+  --elev-notification: 0 0 0 0.5px rgb(0 0 0 / 0.08), 0 8px 28px rgb(0 0 0 / 0.16);
+  --elev-dock: 0 0 0 0.5px rgb(0 0 0 / 0.1), 0 10px 30px rgb(0 0 0 / 0.14);
+  --elev-widget: 0 0 0 0.5px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.1);
+  --elev-control: 0 0 0 0.5px rgb(0 0 0 / 0.16), 0 1px 1.5px rgb(0 0 0 / 0.12);
+  --elev-icon: 0 4px 10px rgb(0 0 0 / 0.18), 0 1px 2px rgb(0 0 0 / 0.14);
+  --elev-text-desktop: 0 0 1px rgb(0 0 0 / 0.5), 0 1px 3px rgb(0 0 0 / 0.55);
+  --elev-icon-drop: drop-shadow(0 2px 3px rgb(0 0 0 / 0.16)) drop-shadow(0 6px 10px rgb(0 0 0 / 0.1));
+
+  /* Material tints (blur recipes live in materials.css) */
+  --tint-menubar: rgb(246 246 246 / 0.45);
+  --tint-menu: rgb(242 242 242 / 0.78);
+  --tint-popover: rgb(246 246 246 / 0.82);
+  --tint-sidebar: rgb(232 232 232 / 0.72);
+  --tint-titlebar: rgb(246 246 246 / 0.86);
+  --tint-dock: rgb(255 255 255 / 0.32);
+  --tint-notification: rgb(246 246 246 / 0.78);
+  --tint-widget: rgb(255 255 255 / 0.52);
+  --tint-hud: rgb(236 236 236 / 0.8);
+  --tint-sheet: rgb(250 250 250 / 0.92);
+  --tint-scrim: rgb(0 0 0 / 0.2);
+  --edge-light: rgb(255 255 255 / 0.55);
+  --edge-dark: rgb(0 0 0 / 0.08);
+
+  /* iOS (UIKit) semantics for the phone shell */
+  --ios-bg: #ffffff;
+  --ios-bg-secondary: #f2f2f7;
+  --ios-bg-tertiary: #ffffff;
+  --ios-bg-grouped: #f2f2f7;
+  --ios-bg-grouped-secondary: #ffffff;
+  --ios-bg-grouped-tertiary: #f2f2f7;
+  --ios-label: #000000;
+  --ios-label-secondary: rgb(60 60 67 / 0.6);
+  --ios-label-tertiary: rgb(60 60 67 / 0.3);
+  --ios-label-quaternary: rgb(60 60 67 / 0.18);
+  --ios-separator: rgb(60 60 67 / 0.29);
+  --ios-separator-opaque: #c6c6c8;
+  --ios-fill: rgb(120 120 128 / 0.2);
+  --ios-fill-secondary: rgb(120 120 128 / 0.16);
+  --ios-fill-tertiary: rgb(118 118 128 / 0.12);
+  --ios-fill-quaternary: rgb(116 116 128 / 0.08);
+  --ios-tint-bar: rgb(249 249 249 / 0.82);
+  --ios-tint-platter: rgb(255 255 255 / 0.36);
+  --ios-tint-module: rgb(255 255 255 / 0.5);
+  --ios-tint-module-on: rgb(255 255 255 / 0.92);
+}
+
+/* ── 2. Semantics: dark (also the default) ───────────────────────────────── */
+
+:root,
+:root[data-appearance='dark'] {
+  --label: rgb(255 255 255 / 0.85);
+  --label-secondary: rgb(255 255 255 / 0.55);
+  --label-tertiary: rgb(255 255 255 / 0.25);
+  --label-quaternary: rgb(255 255 255 / 0.1);
+  --label-on-accent: #ffffff;
+  --label-placeholder: rgb(255 255 255 / 0.25);
+  --link: #419cff;
+
+  --fill: rgb(255 255 255 / 0.1);
+  --fill-secondary: rgb(255 255 255 / 0.08);
+  --fill-tertiary: rgb(255 255 255 / 0.05);
+  --fill-quaternary: rgb(255 255 255 / 0.03);
+  --control: rgb(255 255 255 / 0.25);
+  --control-pressed: rgb(255 255 255 / 0.35);
+
+  --separator: rgb(255 255 255 / 0.1);
+  --separator-opaque: #3d3d3d;
+  --grid: #1a1a1a;
+
+  --window: #2b2b2b;
+  --window-content: #1e1e1e;
+  --window-toolbar: #2d2d2d;
+  --window-edge: rgb(0 0 0 / 0.85);
+  --window-edge-highlight: rgb(255 255 255 / 0.14);
+  --under-page: #282828;
+  --text-background: #1e1e1e;
+  --row-alternate: rgb(255 255 255 / 0.04);
+
+  --selection: #0058d0;
+  --selection-unemphasized: #464646;
+  --selection-text: #3f638b;
+  --highlight-find: #ffff00;
+
+  --traffic-inactive: #4a4a4a;
+  --traffic-inactive-edge: #3c3c3c;
+
+  --elev-window: 0 0 0 0.5px var(--window-edge),
+    inset 0 0 0 0.5px var(--window-edge-highlight), 0 22px 70px 4px rgb(0 0 0 / 0.56);
+  --elev-window-inactive: 0 0 0 0.5px var(--window-edge),
+    inset 0 0 0 0.5px var(--window-edge-highlight), 0 10px 36px rgb(0 0 0 / 0.4);
+  --elev-menu: 0 0 0 0.5px rgb(0 0 0 / 0.6), inset 0 0 0 0.5px rgb(255 255 255 / 0.14),
+    0 12px 36px rgb(0 0 0 / 0.45);
+  --elev-popover: var(--elev-menu);
+  --elev-notification: 0 0 0 0.5px rgb(0 0 0 / 0.5), inset 0 0 0 0.5px rgb(255 255 255 / 0.12),
+    0 10px 30px rgb(0 0 0 / 0.35);
+  --elev-dock: 0 0 0 0.5px rgb(0 0 0 / 0.45), inset 0 0 0 0.5px rgb(255 255 255 / 0.16),
+    0 12px 32px rgb(0 0 0 / 0.3);
+  --elev-widget: 0 0 0 0.5px rgb(0 0 0 / 0.4), inset 0 0 0 0.5px rgb(255 255 255 / 0.1),
+    0 8px 24px rgb(0 0 0 / 0.25);
+  --elev-control: 0 0 0 0.5px rgb(0 0 0 / 0.3), inset 0 0.5px 0 rgb(255 255 255 / 0.12);
+  --elev-icon: 0 4px 10px rgb(0 0 0 / 0.35), 0 1px 2px rgb(0 0 0 / 0.3);
+  --elev-text-desktop: 0 1px 2px rgb(0 0 0 / 0.6);
+  --elev-icon-drop: drop-shadow(0 2px 3px rgb(0 0 0 / 0.3)) drop-shadow(0 6px 12px rgb(0 0 0 / 0.22));
+
+  --tint-menubar: rgb(18 18 22 / 0.28);
+  --tint-menu: rgb(34 34 36 / 0.74);
+  --tint-popover: rgb(38 38 40 / 0.78);
+  --tint-sidebar: rgb(40 40 42 / 0.7);
+  --tint-titlebar: rgb(45 45 45 / 0.86);
+  --tint-dock: rgb(58 58 64 / 0.34);
+  --tint-notification: rgb(44 44 46 / 0.76);
+  --tint-widget: rgb(30 30 34 / 0.46);
+  --tint-hud: rgb(30 30 30 / 0.76);
+  --tint-sheet: rgb(28 28 30 / 0.94);
+  --tint-scrim: rgb(0 0 0 / 0.42);
+  --edge-light: rgb(255 255 255 / 0.16);
+  --edge-dark: rgb(0 0 0 / 0.5);
+
+  --ios-bg: #000000;
+  --ios-bg-secondary: #1c1c1e;
+  --ios-bg-tertiary: #2c2c2e;
+  --ios-bg-grouped: #000000;
+  --ios-bg-grouped-secondary: #1c1c1e;
+  --ios-bg-grouped-tertiary: #2c2c2e;
+  --ios-label: #ffffff;
+  --ios-label-secondary: rgb(235 235 245 / 0.6);
+  --ios-label-tertiary: rgb(235 235 245 / 0.3);
+  --ios-label-quaternary: rgb(235 235 245 / 0.16);
+  --ios-separator: rgb(84 84 88 / 0.65);
+  --ios-separator-opaque: #38383a;
+  --ios-fill: rgb(120 120 128 / 0.36);
+  --ios-fill-secondary: rgb(120 120 128 / 0.32);
+  --ios-fill-tertiary: rgb(118 118 128 / 0.24);
+  --ios-fill-quaternary: rgb(118 118 128 / 0.18);
+  --ios-tint-bar: rgb(22 22 24 / 0.8);
+  --ios-tint-platter: rgb(30 30 32 / 0.42);
+  --ios-tint-module: rgb(60 60 66 / 0.42);
+  --ios-tint-module-on: rgb(255 255 255 / 0.92);
+}
+
+/* ── Accent colour (System Settings → Appearance → Accent colour) ────────── */
+
+:root {
+  --accent: var(--sys-blue);
+  --focus-ring: color-mix(in srgb, var(--accent) 50%, transparent);
+  --accent-hover: color-mix(in srgb, var(--accent) 88%, white);
+  --accent-pressed: color-mix(in srgb, var(--accent) 82%, black);
+  --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+:root[data-accent='purple'] {
+  --accent: var(--sys-purple);
+  --selection: color-mix(in srgb, var(--sys-purple) 80%, black);
+}
+:root[data-accent='pink'] {
+  --accent: var(--sys-pink);
+  --selection: color-mix(in srgb, var(--sys-pink) 80%, black);
+}
+:root[data-accent='red'] {
+  --accent: var(--sys-red);
+  --selection: color-mix(in srgb, var(--sys-red) 80%, black);
+}
+:root[data-accent='orange'] {
+  --accent: var(--sys-orange);
+  --selection: color-mix(in srgb, var(--sys-orange) 78%, black);
+}
+:root[data-accent='yellow'] {
+  --accent: var(--sys-yellow);
+  --label-on-accent: rgb(0 0 0 / 0.85);
+  --selection: color-mix(in srgb, var(--sys-yellow) 70%, black);
+}
+:root[data-accent='green'] {
+  --accent: var(--sys-green);
+  --selection: color-mix(in srgb, var(--sys-green) 75%, black);
+}
+:root[data-accent='graphite'] {
+  --accent: var(--sys-graphite);
+  --selection: color-mix(in srgb, var(--sys-graphite) 70%, black);
+}
+
+/* ── Metrics, motion, layering ───────────────────────────────────────────── */
+/* Fonts, radii, type scale and easings live in theme.css (Tailwind @theme). */
+
+:root {
+  /* Metrics */
+  --menubar-height: 28px;
+  --titlebar-height: 32px;
+  --toolbar-height: 52px;
+  --dock-icon-size: 52px;
+  --dock-magnified-size: 80px;
+  --traffic-size: 12px;
+  --traffic-gap: 8px;
+
+  /* Motion durations. Easings are in theme.css, springs in motion.ts. */
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  /* Layering, back to front */
+  --z-wallpaper: 0;
+  --z-widgets: 5;
+  --z-desktop-icons: 10;
+  --z-windows: 100;
+  --z-dock: 5000;
+  --z-menubar: 6000;
+  --z-notifications: 7000;
+  --z-menus: 7200;
+  --z-control-center: 7500;
+  --z-system: 9000;
+  --z-boot: 9500;
+}
+
+/* Wallpaper per appearance (original artwork in src/assets/wallpapers) */
+:root {
+  --wallpaper-fallback: #10131f;
+}
+:root[data-appearance='light'] {
+  --wallpaper-fallback: #9fc3e6;
+}

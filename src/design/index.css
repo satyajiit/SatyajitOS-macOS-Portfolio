@@ -1,0 +1,9 @@
+/*
+ * Design system entry. Import order matters:
+ * Tailwind → raw tokens → Tailwind theme mapping → materials → base layer.
+ */
+@import 'tailwindcss';
+@import './tokens.css';
+@import './theme.css';
+@import './materials.css';
+@import './base.css';

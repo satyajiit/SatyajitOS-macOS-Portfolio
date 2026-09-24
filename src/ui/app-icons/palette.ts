@@ -1,0 +1,40 @@
+/**
+ * Icon artwork palette. App icons are illustrations: like real macOS icons,
+ * they keep their colours in both appearances, so they read from this fixed
+ * palette (Apple's light-appearance system colours plus a few art shades)
+ * rather than from the live UI tokens.
+ */
+export const art = {
+  orangeTop: '#ffb340',
+  orangeBottom: '#ff7a00',
+  blueTop: '#4fc3ff',
+  blueBottom: '#0a6cff',
+  folderBack: '#3d95eb',
+  folderBackTop: '#5ab0f5',
+  folderFrontTop: '#9ad6ff',
+  folderFrontBottom: '#56acf3',
+  folderEngrave: '#3b8fdc',
+  paper: '#ffffff',
+  paperShade: '#e6edf7',
+  mist: '#f2f2f7',
+  mistDeep: '#d1d1d6',
+  lineLight: '#e5e5ea',
+  lineMid: '#c7c7cc',
+  graphiteTop: '#3a3a3c',
+  graphiteBottom: '#161618',
+  screen: '#0c0c0e',
+  prompt: '#f2f2f2',
+  steelTop: '#a1a1a6',
+  steelBottom: '#6c6c70',
+  gearFace: '#ececf0',
+  gearRing: '#b9b9be',
+  creamTop: '#fff4e3',
+  creamBottom: '#f3d5ad',
+  mugTop: '#8a5535',
+  mugBottom: '#4e2c19',
+  crema: '#c98d5a',
+  latte: '#f7e6d0',
+  saucer: '#e4c197',
+  steam: '#c9a27e',
+  shadow: '#000000',
+} as const

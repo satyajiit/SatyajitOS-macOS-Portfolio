@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-appearance="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+    />
+    <title>Satyajit Pradhan — Product + Tech Alchemist | SatyajitOS</title>
+    <meta
+      name="description"
+      content="A macOS & iOS inspired interactive portfolio. Boot it up, drag the windows around, poke the Terminal, read the (very real) inbox."
+    />
+    <meta name="author" content="Satyajit Pradhan" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#000000" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/icons/app/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="SatyajitOS" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SatyajitOS" />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:title" content="SatyajitOS — a portfolio that boots" />
+    <meta
+      property="og:description"
+      content="A macOS & iOS inspired interactive portfolio. Boot it up, drag the windows around, poke the Terminal."
+    />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@satyajiit" />
+    <meta name="twitter:creator" content="@satyajiit" />
+
+    <!-- Apply the saved appearance before first paint so there is no flash. -->
+    <script>
+      try {
+        var saved = JSON.parse(localStorage.getItem('satyajitos:appearance') || 'null')
+        var mode = saved && saved.mode
+        var dark = mode ? mode === 'dark' : true
+        if (mode === 'auto') dark = matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.dataset.appearance = dark ? 'dark' : 'light'
+        if (saved && saved.accent && saved.accent !== 'blue')
+          document.documentElement.dataset.accent = saved.accent
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>SatyajitOS needs JavaScript to boot. It is, after all, an operating system.</noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

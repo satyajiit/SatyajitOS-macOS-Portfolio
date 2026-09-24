@@ -1,0 +1,79 @@
+{
+  "name": "satyajitos",
+  "version": "2.0.0",
+  "description": "SatyajitOS — a macOS & iOS inspired interactive portfolio. Boot it, drag windows, open Terminal, break things.",
+  "author": "Satyajit Pradhan (https://github.com/satyajiit)",
+  "license": "MIT",
+  "homepage": "https://github.com/satyajiit/SatyajitOS-macOS-Portfolio",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyajiit/SatyajitOS-macOS-Portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "macos",
+    "macos-portfolio",
+    "ios",
+    "vue",
+    "vue3",
+    "pwa",
+    "desktop-environment",
+    "web-os",
+    "tailwindcss",
+    "vite"
+  ],
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "build-only": "vite build",
+    "preview": "vite preview --port 4173",
+    "type-check": "vue-tsc --build",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "run-s lint:check type-check test build-only",
+    "media": "node scripts/capture.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "@lucide/vue": "^1.48.0",
+    "@vueuse/core": "^15.0.0",
+    "firebase": "^12.19.0",
+    "motion-v": "^2.4.4",
+    "pinia": "^4.0.3",
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@tsconfig/node24": "^24.0.5",
+    "@types/node": "^26.6.2",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/test-utils": "^2.5.1",
+    "@vue/tsconfig": "^0.9.1",
+    "eslint": "^10.11.0",
+    "eslint-plugin-vue": "^10.11.1",
+    "happy-dom": "^20.14.5",
+    "jiti": "^2.7.0",
+    "npm-run-all2": "^9.0.3",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.9",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.0",
+    "vite-plugin-pwa": "^1.3.0",
+    "vitest": "^5.0.1",
+    "vue-tsc": "^3.3.11",
+    "workbox-window": "^7.4.1"
+  }
+}

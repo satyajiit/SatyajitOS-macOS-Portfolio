@@ -1,0 +1,6 @@
+export { Shell, type ShellOptions } from './shell'
+export { HistoryCursor } from './history'
+export { COMMANDS, findCommand } from './commands'
+export { lineText } from './output'
+export type { Completion } from './complete'
+export type * from './types'

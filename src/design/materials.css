@@ -1,0 +1,168 @@
+/*
+ * Vibrancy materials. Each one is tint + backdrop blur + saturation boost
+ * + a hairline edge that catches the light, which is how AppKit's
+ * NSVisualEffectView reads on screen. Thicker surfaces blur more.
+ *
+ * `prefers-reduced-transparency` turns every material into a solid surface,
+ * like System Settings → Accessibility → Display → Reduce transparency.
+ */
+
+@utility material-menubar {
+  background-color: var(--tint-menubar);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-menu {
+  background-color: var(--tint-menu);
+  backdrop-filter: blur(var(--blur-md)) saturate(180%);
+  box-shadow: var(--elev-menu);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-popover {
+  background-color: var(--tint-popover);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  box-shadow: var(--elev-popover);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-sidebar {
+  background-color: var(--tint-sidebar);
+  backdrop-filter: blur(var(--blur-lg)) saturate(160%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-titlebar {
+  background-color: var(--tint-titlebar);
+  backdrop-filter: blur(var(--blur-md)) saturate(180%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window-toolbar);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-dock {
+  background-color: var(--tint-dock);
+  backdrop-filter: blur(var(--blur-lg)) saturate(200%);
+  box-shadow: var(--elev-dock), inset 0 0.5px 0 var(--edge-light);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-notification {
+  background-color: var(--tint-notification);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  box-shadow: var(--elev-notification);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-widget {
+  background-color: var(--tint-widget);
+  backdrop-filter: blur(var(--blur-xl)) saturate(180%);
+  box-shadow: var(--elev-widget);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-hud {
+  background-color: var(--tint-hud);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  box-shadow: var(--elev-popover);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-sheet {
+  background-color: var(--tint-sheet);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--window-content);
+    backdrop-filter: none;
+  }
+}
+
+/* iOS: navigation / tab bars */
+@utility material-ios-bar {
+  background-color: var(--ios-tint-bar);
+  backdrop-filter: blur(var(--blur-md)) saturate(180%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--ios-bg-secondary);
+    backdrop-filter: none;
+  }
+}
+
+/* iOS: dock platter, widget stacks, notification cards */
+@utility material-ios-platter {
+  background-color: var(--ios-tint-platter);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  box-shadow: inset 0 0.5px 0 var(--edge-light);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--ios-bg-secondary);
+    backdrop-filter: none;
+  }
+}
+
+/* iOS: Control Centre module (off state; add .is-on for the lit state) */
+@utility material-ios-module {
+  background-color: var(--ios-tint-module);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--ios-bg-tertiary);
+    backdrop-filter: none;
+  }
+}
+
+/* Keyboard focus: the macOS focus ring, drawn outside, never animated */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 0;
+  }
+}
+
+/* Chrome that should not select like text (menu bar, dock, title bars) */
+@utility chrome {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Numbers that tick (clocks, battery %) must not jitter */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}

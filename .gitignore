@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Dependencies & build output
+node_modules
+dist
+dist-ssr
+dev-dist
+coverage
+*.tsbuildinfo
+stats.html
+
+# Local env (never commit real keys)
+.env
+.env.*
+!.env.example
+*.local
+
+# Firebase local state
+.firebase/
+.firebaserc
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.sw?
+
