@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AtSign, Briefcase, Code, ExternalLink, Mail } from '@lucide/vue'
+import { ExternalLink, Mail } from '@lucide/vue'
 import { useRouter } from 'vue-router'
 
 import {
@@ -16,8 +16,8 @@ import {
   techStack,
   type Spec,
 } from '@/content/about'
-import { profile } from '@/content/profile'
-import { IosNavBar, UiListGroup, UiListRow } from '@/ui'
+import { profile, socials } from '@/content/profile'
+import { BrandIcon, Glyph, IconText, IosNavBar, UiListGroup, UiListRow } from '@/ui'
 
 import { aboutIcons, tintVar } from './icons'
 import { useUptime } from './useUptime'
@@ -28,12 +28,6 @@ const { uptime, lastUpdated } = useUptime()
 
 const specValue = (spec: Spec) =>
   spec.value === 'uptime' ? uptime.value : spec.value === 'location' ? profile.location : spec.value
-
-const links = [
-  { title: 'LinkedIn', url: profile.links.linkedin, icon: Briefcase, tint: 'var(--sys-blue)' },
-  { title: 'GitHub', url: profile.links.github, icon: Code, tint: 'var(--sys-graphite)' },
-  { title: 'Twitter', url: profile.links.twitter, icon: AtSign, tint: 'var(--sys-cyan)' },
-]
 
 const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferrer')
 const contact = () => router.push({ name: 'app', params: { appId: 'email' } })
@@ -62,7 +56,7 @@ const contact = () => router.push({ name: 'app', params: { appId: 'email' } })
           {{ tag }}
         </li>
       </ul>
-      <p class="mt-3 text-ios-footnote text-ios-label-secondary">“{{ mottos[0] }}”</p>
+      <p class="mt-3 text-ios-footnote text-ios-label-secondary">“<IconText :text="mottos[0]" />”</p>
     </header>
 
     <UiListGroup header="System Information">
@@ -100,7 +94,7 @@ const contact = () => router.push({ name: 'app', params: { appId: 'email' } })
           class="flex flex-col-reverse rounded-ios-group bg-ios-grouped-secondary px-4 py-3"
         >
           <dt class="text-ios-footnote text-ios-label-secondary">{{ metric.label }}</dt>
-          <dd class="tabular text-ios-title-2 font-bold text-ios-label">{{ metric.value }}</dd>
+          <dd class="tabular text-ios-title-2 font-bold text-ios-label"><IconText :text="metric.value" /></dd>
         </div>
       </dl>
     </section>
@@ -137,10 +131,12 @@ const contact = () => router.push({ name: 'app', params: { appId: 'email' } })
       <li class="flex flex-wrap gap-1.5 p-4">
         <span
           v-for="item in group.items"
-          :key="item"
-          class="rounded-full bg-ios-fill-tertiary px-2.5 py-1 text-ios-footnote text-ios-label"
+          :key="item.label"
+          class="flex items-center gap-1.5 rounded-full bg-ios-fill-tertiary py-1 pl-2 pr-2.5 text-ios-footnote text-ios-label"
         >
-          {{ item }}
+          <BrandIcon v-if="item.brand" :name="item.brand" :size="15" decorative />
+          <Glyph v-else name="database" :tinted="false" class="text-ios-label-secondary" />
+          {{ item.label }}
         </span>
       </li>
     </UiListGroup>
@@ -151,10 +147,10 @@ const contact = () => router.push({ name: 'app', params: { appId: 'email' } })
         :key="fact.text"
         class="flex gap-3 border-b-[0.5px] border-ios-separator py-3 pl-4 pr-4 last:border-b-0"
       >
-        <span class="w-6 shrink-0 text-center text-ios-body" aria-hidden="true">{{
-          fact.emoji
-        }}</span>
-        <span class="text-ios-subheadline text-ios-label">{{ fact.text }}</span>
+        <span class="w-6 shrink-0 text-center text-ios-body" aria-hidden="true">
+          <Glyph :name="fact.icon" />
+        </span>
+        <span class="text-ios-subheadline text-ios-label"><IconText :text="fact.text" /></span>
       </li>
     </UiListGroup>
 
@@ -169,14 +165,13 @@ const contact = () => router.push({ name: 'app', params: { appId: 'email' } })
         <template #icon><Mail aria-hidden="true" /></template>
       </UiListRow>
       <UiListRow
-        v-for="link in links"
-        :key="link.title"
-        :title="link.title"
-        :tint="link.tint"
+        v-for="link in socials"
+        :key="link.label"
+        :title="link.label"
         interactive
         @select="openLink(link.url)"
       >
-        <template #icon><component :is="link.icon" aria-hidden="true" /></template>
+        <template #icon><BrandIcon :name="link.brand" :size="24" decorative class="text-ios-label" /></template>
         <template #accessory>
           <ExternalLink class="size-4 text-ios-label-tertiary" aria-hidden="true" />
         </template>

@@ -45,6 +45,7 @@
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
     "@lucide/vue": "^1.48.0",
+    "@selemondev/svgl-vue": "^2.17.0",
     "@vueuse/core": "^15.0.0",
     "firebase": "^12.19.0",
     "motion-v": "^2.4.4",

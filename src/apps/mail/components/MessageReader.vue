@@ -2,6 +2,8 @@
 import { Flag } from '@lucide/vue'
 import { motion } from 'motion-v'
 
+import IconText from '@/ui/IconText.vue'
+
 import type { MailMessage } from '../store'
 import { fullDate } from '../format'
 import MailAvatar from './MailAvatar.vue'
@@ -21,7 +23,7 @@ defineProps<{ message: MailMessage | null }>()
       :transition="{ duration: 0.15 }"
     >
       <header class="flex gap-3 border-b border-separator px-6 pb-4 pt-5">
-        <MailAvatar :name="message.from.name" :address="message.from.address" :size="40" />
+        <MailAvatar :name="message.from.name" :address="message.from.address" :brand="message.from.brand" :size="40" />
         <div class="min-w-0 flex-1">
           <div class="flex items-baseline gap-2">
             <h2 class="min-w-0 flex-1 truncate text-headline text-label">
@@ -36,7 +38,7 @@ defineProps<{ message: MailMessage | null }>()
               {{ fullDate(message.receivedAt) }}
             </time>
           </div>
-          <p class="mt-0.5 text-body font-semibold text-label">{{ message.subject }}</p>
+          <p class="mt-0.5 text-body font-semibold text-label"><IconText :text="message.subject" /></p>
           <p class="mt-0.5 flex items-center gap-2 text-subheadline text-label-secondary">
             <span class="truncate">To: {{ message.to.name }}</span>
             <span
@@ -48,7 +50,7 @@ defineProps<{ message: MailMessage | null }>()
         </div>
       </header>
       <div class="body max-w-[68ch] whitespace-pre-wrap px-6 py-5 text-body text-label">
-        {{ message.body }}
+        <IconText :text="message.body" />
       </div>
     </motion.article>
 

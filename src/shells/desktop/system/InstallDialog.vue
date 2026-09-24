@@ -9,6 +9,7 @@ import { spring } from '@/design/motion'
 import { useNotificationsStore } from '@/stores/notifications'
 import UiAppIcon from '@/ui/UiAppIcon.vue'
 import UiButton from '@/ui/UiButton.vue'
+import IconText from '@/ui/IconText.vue'
 
 import { shellUi } from '../shellUi'
 
@@ -51,13 +52,13 @@ onMounted(() => primary.value?.querySelector('button')?.focus())
       :transition="spring.default"
     >
       <UiAppIcon name="brand" :size="64" />
-      <h2 id="install-title" class="text-headline text-label">{{ title }}</h2>
+      <h2 id="install-title" class="text-headline text-label"><IconText :text="title" /></h2>
       <p id="install-message" class="text-callout text-label-secondary">
-        {{ pwa.canPrompt.value ? message : pwa.manualInstructions.value }}
+        <IconText :text="pwa.canPrompt.value ? message : pwa.manualInstructions.value" />
       </p>
       <ul v-if="pwa.canPrompt.value" class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-callout text-label-secondary">
         <li v-for="perk in pwaCopy.perks" :key="perk" class="flex items-center gap-1">
-          <Check class="size-3 text-green" aria-hidden="true" />{{ perk }}
+          <Check class="size-3 text-green" aria-hidden="true" /><IconText :text="perk" />
         </li>
       </ul>
       <div ref="primary" class="mt-1 flex w-full flex-col gap-2">

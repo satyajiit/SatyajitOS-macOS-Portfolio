@@ -21,7 +21,14 @@ const ONLY = process.env.MEDIA_ONLY ?? 'all'
 const OUT = resolve('docs/media')
 const TMP = resolve('node_modules/.media-tmp')
 const DESKTOP = { width: 1440, height: 900 }
-const PHONE = { ...devices['iPhone 15 Pro'], deviceScaleFactor: 2 }
+// The preset's viewport leaves room for Safari's toolbars (393×659); use the
+// whole 393×852 screen, as the installed PWA sees it, so stills and clips match.
+const PHONE = {
+  ...devices['iPhone 15 Pro'],
+  viewport: { width: 393, height: 852 },
+  screen: { width: 393, height: 852 },
+  deviceScaleFactor: 2,
+}
 
 mkdirSync(OUT, { recursive: true })
 rmSync(TMP, { recursive: true, force: true })

@@ -34,7 +34,7 @@ const alias: CommandSpec = {
       return
     }
     ctx.out.print('Setting custom aliases is not implemented yet!', 'yellow')
-    ctx.out.print('But you can use the predefined aliases above! 😊')
+    ctx.out.print('But you can use the predefined aliases above! :smile:')
   },
 }
 
@@ -63,7 +63,7 @@ const theme: CommandSpec = {
       return 1
     }
     ctx.out.effect({ type: 'theme', theme: next })
-    ctx.out.print(`🎨 Theme changed to: ${themes[next]!.name}`, 'green')
+    ctx.out.print(`:palette: Theme changed to: ${themes[next]!.name}`, 'green')
   },
 }
 
@@ -74,13 +74,13 @@ const status: CommandSpec = {
   run(ctx) {
     const { shell, content } = ctx
     const minutes = Math.floor((ctx.now().getTime() - shell.startedAt.getTime()) / 60000)
-    ctx.out.print('📊 Terminal Status Report:')
-    ctx.out.print(`🎨 Current Theme: ${content.themes[shell.theme]?.name ?? shell.theme}`)
-    ctx.out.print(shell.platform === 'mobile' ? '📱 Platform: iOS Mobile' : '💻 Platform: macOS Desktop')
-    if (shell.platform === 'mobile') ctx.out.print('⌨️  Extra keys: Visible')
-    ctx.out.print(`📝 Commands Executed: ${shell.history.length}`)
-    ctx.out.print(`🕐 Session Time: ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`)
-    ctx.out.print('✅ All systems operational', 'green')
+    ctx.out.print(':chart: Terminal Status Report:')
+    ctx.out.print(`:palette: Current Theme: ${content.themes[shell.theme]?.name ?? shell.theme}`)
+    ctx.out.print(shell.platform === 'mobile' ? ':phone: Platform: iOS Mobile' : ':laptop: Platform: macOS Desktop')
+    if (shell.platform === 'mobile') ctx.out.print(':keyboard:  Extra keys: Visible')
+    ctx.out.print(`:notes: Commands Executed: ${shell.history.length}`)
+    ctx.out.print(`:clock: Session Time: ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`)
+    ctx.out.print(':done: All systems operational', 'green')
   },
 }
 

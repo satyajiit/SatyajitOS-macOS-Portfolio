@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import IconText from '@/ui/IconText.vue'
+
 import type { Line, PromptParts, Span, Tone } from './engine'
 
 /**
@@ -63,9 +65,9 @@ const after = computed(() => props.input.slice(props.caret + 1))
               rel="noopener noreferrer"
               class="term-link"
               :class="spanClass(span)"
-              >{{ span.text }}</a
-            >
-            <span v-else :class="spanClass(span)">{{ span.text }}</span>
+              ><IconText :text="span.text" :tinted="false"
+            /></a>
+            <span v-else :class="spanClass(span)"><IconText :text="span.text" :tinted="false" /></span>
           </template>
           <span v-if="!line.spans.length || line.spans.every((s) => !s.text)">&#8203;</span>
         </template>

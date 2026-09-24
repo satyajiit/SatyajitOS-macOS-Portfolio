@@ -7,6 +7,8 @@ import { relativeTime, useClock } from '@/composables/useClock'
 import type { NotificationAction, OsNotification } from '@/stores/notifications'
 import UiAppIcon from '@/ui/UiAppIcon.vue'
 import UiButton from '@/ui/UiButton.vue'
+import IconText from '@/ui/IconText.vue'
+import { stripGlyphs } from '@/ui/glyphs/text'
 
 /**
  * One notification, drawn like macOS: app icon, bold title, body, relative
@@ -29,7 +31,7 @@ const primary = computed<NotificationAction | undefined>(
 <template>
   <article
     class="card material-notification relative flex rounded-notification p-3"
-    :aria-label="`${notification.title}. ${notification.body}`"
+    :aria-label="stripGlyphs(`${notification.title}. ${notification.body}`)"
   >
     <button
       type="button"
@@ -49,11 +51,11 @@ const primary = computed<NotificationAction | undefined>(
         <UiAppIcon :name="icon" :size="34" :shadow="false" class="mt-0.5" />
         <span class="min-w-0 flex-1">
           <span class="flex items-baseline justify-between gap-2">
-            <span class="truncate text-headline text-label">{{ notification.title }}</span>
+            <span class="truncate text-headline text-label"><IconText :text="notification.title" /></span>
             <span class="shrink-0 text-subheadline text-label-secondary">{{ time }}</span>
           </span>
           <span v-if="notification.body" class="clamp mt-0.5 block text-body text-label">
-            {{ notification.body }}
+            <IconText :text="notification.body" />
           </span>
         </span>
       </button>

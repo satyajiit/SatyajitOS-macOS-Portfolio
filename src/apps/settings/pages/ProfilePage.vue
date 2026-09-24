@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { AtSign, BriefcaseBusiness, FolderGit2, Mail, MapPin, MessageCircle } from '@lucide/vue'
+import { AtSign, Mail, MapPin } from '@lucide/vue'
 
-import { profile } from '@/content/profile'
-import { UiListGroup, UiListRow } from '@/ui'
+import { profile, socials } from '@/content/profile'
+import { BrandIcon, UiListGroup, UiListRow } from '@/ui'
 
 import SettingsPage from '../SettingsPage.vue'
 
@@ -31,14 +31,14 @@ const open = (url: string) => window.open(url, '_blank', 'noopener')
     </UiListGroup>
 
     <UiListGroup header="Elsewhere">
-      <UiListRow title="GitHub" tint="var(--sys-graphite)" chevron @select="open(profile.links.github)">
-        <template #icon><FolderGit2 /></template>
-      </UiListRow>
-      <UiListRow title="LinkedIn" tint="var(--sys-blue)" chevron @select="open(profile.links.linkedin)">
-        <template #icon><BriefcaseBusiness /></template>
-      </UiListRow>
-      <UiListRow title="Twitter" tint="var(--sys-cyan)" chevron @select="open(profile.links.twitter)">
-        <template #icon><MessageCircle /></template>
+      <UiListRow
+        v-for="link in socials"
+        :key="link.label"
+        :title="link.label"
+        chevron
+        @select="open(link.url)"
+      >
+        <template #icon><BrandIcon :name="link.brand" :size="24" decorative class="text-ios-label" /></template>
       </UiListRow>
     </UiListGroup>
 

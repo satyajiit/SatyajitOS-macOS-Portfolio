@@ -3,6 +3,7 @@ import { motion } from 'motion-v'
 import { computed } from 'vue'
 
 import { spring } from '@/design/motion'
+import IconText from '@/ui/IconText.vue'
 
 import { lineCount, previewOf, resolveLocation, type Item } from '../fs'
 
@@ -29,27 +30,27 @@ const ios = computed(() => props.platform === 'ios')
       <div class="size-32"><ItemIcon :item="item" /></div>
       <h2 class="t-title">{{ item.name }}</h2>
       <p class="t-secondary">{{ folderCount }} {{ folderCount === 1 ? 'item' : 'items' }}</p>
-      <p v-if="item.description" class="t-body max-w-md">{{ item.description }}</p>
+      <p v-if="item.description" class="t-body max-w-md"><IconText :text="item.description" /></p>
     </div>
 
     <template v-for="(block, i) in blocks" :key="i">
       <header v-if="block.type === 'heading'" class="text-center">
-        <h2 class="t-title">{{ block.title }}</h2>
-        <p v-if="block.subtitle" class="t-secondary mt-1">{{ block.subtitle }}</p>
+        <h2 class="t-title"><IconText :text="block.title" /></h2>
+        <p v-if="block.subtitle" class="t-secondary mt-1"><IconText :text="block.subtitle" /></p>
       </header>
 
       <div v-else-if="block.type === 'stats'" class="stats grid gap-2">
         <div v-for="stat in block.items" :key="stat.label" class="tile">
-          <div class="t-stat tabular">{{ stat.value }}</div>
-          <div class="t-caption">{{ stat.label }}</div>
+          <div class="t-stat tabular"><IconText :text="stat.value" /></div>
+          <div class="t-caption"><IconText :text="stat.label" /></div>
         </div>
       </div>
 
       <section v-else-if="block.type === 'bars'" class="card">
-        <h3 class="t-headline mb-3">{{ block.title }}</h3>
+        <h3 class="t-headline mb-3"><IconText :text="block.title" /></h3>
         <ul class="flex flex-col gap-2">
           <li v-for="(row, r) in block.rows" :key="row.label" class="flex items-center gap-3">
-            <span class="t-caption w-9 shrink-0">{{ row.label }}</span>
+            <span class="t-caption w-9 shrink-0"><IconText :text="row.label" /></span>
             <div class="track relative h-5 flex-1 overflow-clip rounded-full">
               <motion.div
                 class="fill absolute inset-y-0 left-0 w-full origin-left rounded-full"
@@ -58,22 +59,22 @@ const ios = computed(() => props.platform === 'ios')
                 :transition="{ ...spring.gentle, delay: r * 0.04 }"
               />
               <span class="t-caption absolute inset-0 grid place-items-center font-medium">
-                {{ row.value }} {{ block.unit }}
+                <IconText :text="row.value" /> {{ block.unit }}
               </span>
             </div>
-            <span v-if="row.note" class="w-6 shrink-0 text-center" aria-hidden="true">{{ row.note }}</span>
+            <span v-if="row.note" class="w-6 shrink-0 text-center" aria-hidden="true"><IconText :text="row.note" /></span>
           </li>
         </ul>
       </section>
 
       <div v-else-if="block.type === 'compare'" class="grid gap-3" :class="ios ? 'grid-cols-1' : 'grid-cols-2'">
         <section v-for="(col, c) in block.columns" :key="col.title" class="card">
-          <h3 class="t-headline mb-2">{{ col.title }}</h3>
+          <h3 class="t-headline mb-2"><IconText :text="col.title" /></h3>
           <dl class="flex flex-col gap-1.5">
             <div v-for="row in col.rows" :key="row.label" class="flex justify-between gap-3">
-              <dt class="t-secondary">{{ row.label }}</dt>
+              <dt class="t-secondary"><IconText :text="row.label" /></dt>
               <dd class="t-body font-medium" :class="{ 'text-green': c === block.columns.length - 1 }">
-                {{ row.value }}
+                <IconText :text="row.value" />
               </dd>
             </div>
           </dl>
@@ -81,8 +82,8 @@ const ios = computed(() => props.platform === 'ios')
       </div>
 
       <section v-else-if="block.type === 'section'" class="card">
-        <h3 class="t-headline mb-1.5">{{ block.title }}</h3>
-        <p class="t-body whitespace-pre-line">{{ block.body }}</p>
+        <h3 class="t-headline mb-1.5"><IconText :text="block.title" /></h3>
+        <p class="t-body whitespace-pre-line"><IconText :text="block.body" /></p>
       </section>
 
       <figure v-else-if="block.type === 'text' && block.mono" class="code overflow-clip">
@@ -90,18 +91,18 @@ const ios = computed(() => props.platform === 'ios')
           <span>{{ block.language ?? 'Text' }}</span>
           <span class="tabular">{{ lineCount(block.body) }} lines · {{ item.size ?? 'Unknown size' }}</span>
         </figcaption>
-        <pre class="code-body overflow-x-auto"><code>{{ block.body }}</code></pre>
+        <pre class="code-body overflow-x-auto"><code><IconText :text="block.body" /></code></pre>
       </figure>
 
       <div v-else-if="block.type === 'text'" class="page">
-        <p class="t-body whitespace-pre-line">{{ block.body }}</p>
+        <p class="t-body whitespace-pre-line"><IconText :text="block.body" /></p>
       </div>
 
       <figure v-else-if="block.type === 'art'" class="flex flex-col items-center gap-2">
         <div class="art w-full overflow-clip">
           <ImageArt :art="block.art" :label="item.name" />
         </div>
-        <figcaption v-if="block.caption" class="t-secondary text-center">{{ block.caption }}</figcaption>
+        <figcaption v-if="block.caption" class="t-secondary text-center"><IconText :text="block.caption" /></figcaption>
       </figure>
     </template>
   </div>

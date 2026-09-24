@@ -20,6 +20,7 @@ import UiSearchField from '@/ui/UiSearchField.vue'
 import UiSidebarItem from '@/ui/UiSidebarItem.vue'
 import UiSidebarSection from '@/ui/UiSidebarSection.vue'
 import { WindowSidebar, WindowToolbar, useWindowContext } from '@/ui/window'
+import IconText from '@/ui/IconText.vue'
 
 import ComposeSheet from './components/ComposeSheet.vue'
 import MessageList from './components/MessageList.vue'
@@ -156,7 +157,7 @@ onMounted(() => {
           @select="pickMailbox(box.id)"
         >
           <template #icon><component :is="box.icon" /></template>
-          {{ mailboxCopy[box.id].title }}
+          <IconText :text="mailboxCopy[box.id].title" />
         </UiSidebarItem>
       </UiSidebarSection>
     </WindowSidebar>

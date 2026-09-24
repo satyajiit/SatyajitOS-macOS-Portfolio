@@ -29,6 +29,7 @@ import { spring } from '@/design/motion'
 import { useAppearanceStore } from '@/stores/appearance'
 import { useMobileStore } from '@/stores/mobile'
 import { useNotificationsStore } from '@/stores/notifications'
+import IconText from '@/ui/IconText.vue'
 
 import CcButton from './control/CcButton.vue'
 import CcVerticalSlider from './control/CcVerticalSlider.vue'
@@ -70,7 +71,7 @@ const { pause: stopTimer, resume: runTimer } = useIntervalFn(
     timerLeft.value -= 1
     if (timerLeft.value <= 0) {
       stopTimer()
-      notifications.notify({ title: 'Timer', body: 'Your one-minute timer is done. ⏰' })
+      notifications.notify({ title: 'Timer', body: 'Your one-minute timer is done. :alarm:' })
     }
   },
   1000,
@@ -112,7 +113,7 @@ const { y, onDown, onMove, onUp } = usePanelDrag(() => store.closePanel())
     >
       <div class="content mx-auto" @click.self="store.closePanel()">
         <p class="caption mb-4 min-h-8 px-1 text-ios-footnote text-white/75" aria-live="polite">
-          {{ caption }}
+          <IconText :text="caption" />
         </p>
 
         <div class="grid-cc">
@@ -249,25 +250,25 @@ const { y, onDown, onMove, onUp } = usePanelDrag(() => store.closePanel())
           </CcButton>
         </div>
 
-        <h2 class="mb-3 mt-8 px-1 text-ios-headline text-white">{{ x.title }}</h2>
+        <h2 class="mb-3 mt-8 px-1 text-ios-headline text-white"><IconText :text="x.title" /></h2>
         <div class="flex flex-col gap-4 pb-20">
           <CcWideSlider
             v-model="c.productivity"
             :label="x.productivity.label"
-            emoji="⚡"
+            emoji=":zap:"
             :status="pickBelow(x.productivity.emoji, c.productivity)"
             :hint="pickBelow(x.productivity.hint, c.productivity)"
           />
           <CcWideSlider
             v-model="c.caffeine"
             :label="x.caffeine.label"
-            emoji="☕"
+            emoji=":coffee:"
             :status="pickBelow(x.caffeine.emoji, c.caffeine)"
             :hint="pickBelow(x.caffeine.hint, c.caffeine)"
           />
           <CcWideToggle
             :label="x.procrastination.label"
-            emoji="🚫"
+            emoji=":no:"
             :on="c.procrastinationBlocker"
             on-text="Enabled"
             off-text="Disabled"
@@ -277,13 +278,13 @@ const { y, onDown, onMove, onUp } = usePanelDrag(() => store.closePanel())
           <CcWideSlider
             v-model="c.codeQuality"
             :label="x.codeQuality.label"
-            emoji="🎯"
+            emoji=":target:"
             :status="pickBelow(x.codeQuality.emoji, c.codeQuality)"
             :hint="pickBelow(x.codeQuality.hint, c.codeQuality)"
           />
           <CcWideToggle
             :label="x.innovation.label"
-            emoji="💡"
+            emoji=":idea:"
             :on="c.innovationMode"
             :on-text="x.innovation.onState"
             :off-text="x.innovation.offState"

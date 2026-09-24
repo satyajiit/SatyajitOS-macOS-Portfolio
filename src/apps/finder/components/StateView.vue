@@ -3,7 +3,7 @@ import { FolderOpen, Lock, Search, TriangleAlert, Wifi } from '@lucide/vue'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { finderCopy } from '@/content/files'
-import { UiButton, UiSpinner } from '@/ui'
+import { IconText, UiButton, UiSpinner } from '@/ui'
 
 import { fill } from '../fs'
 
@@ -49,14 +49,14 @@ const ios = computed(() => props.platform === 'ios')
   >
     <template v-if="state === 'loading'">
       <UiSpinner :size="24" class="mb-2" />
-      <p :class="ios ? 'text-ios-headline text-ios-label' : 'text-headline text-label'">{{ loading.title }}</p>
-      <p class="max-w-sm" :class="ios ? 'text-ios-footnote' : 'text-callout'">{{ loading.subtitle }}</p>
+      <p :class="ios ? 'text-ios-headline text-ios-label' : 'text-headline text-label'"><IconText :text="loading.title" /></p>
+      <p class="max-w-sm" :class="ios ? 'text-ios-footnote' : 'text-callout'"><IconText :text="loading.subtitle" /></p>
     </template>
 
     <template v-else-if="state === 'empty' || state === 'noResults'">
       <component :is="state === 'empty' ? FolderOpen : Search" class="mb-1 size-10 opacity-50" aria-hidden="true" />
       <p :class="ios ? 'text-ios-headline text-ios-label' : 'text-headline text-label'">
-        {{ state === 'empty' ? finderCopy.empty.title : finderCopy.noResults.title }}
+        <IconText :text="state === 'empty' ? finderCopy.empty.title : finderCopy.noResults.title" />
       </p>
       <p class="max-w-sm" :class="ios ? 'text-ios-footnote' : 'text-callout'">
         {{ state === 'empty' ? finderCopy.empty.body : fill(finderCopy.noResults.body, { q: query }) }}
@@ -66,13 +66,13 @@ const ios = computed(() => props.platform === 'ios')
 
     <template v-else>
       <component :is="errorIcon" class="mb-1 size-10 text-red" aria-hidden="true" />
-      <p :class="ios ? 'text-ios-headline text-ios-label' : 'text-headline text-label'">{{ error.title }}</p>
-      <p class="max-w-sm" :class="ios ? 'text-ios-footnote' : 'text-body'">{{ error.message }}</p>
+      <p :class="ios ? 'text-ios-headline text-ios-label' : 'text-headline text-label'"><IconText :text="error.title" /></p>
+      <p class="max-w-sm" :class="ios ? 'text-ios-footnote' : 'text-body'"><IconText :text="error.message" /></p>
       <p
         class="mt-2 max-w-sm rounded-lg px-3 py-2 font-mono"
         :class="ios ? 'bg-ios-fill-quaternary text-ios-caption-1' : 'bg-fill-quaternary text-subheadline'"
       >
-        {{ error.technical }}
+        <IconText :text="error.technical" />
       </p>
       <div class="mt-3 flex flex-wrap justify-center gap-2">
         <UiButton size="small" @click="emit('retry')">Try Again</UiButton>

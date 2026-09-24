@@ -3,9 +3,11 @@
  * copy and every notification it can post. Contact links come from ./profile.ts.
  */
 
+import type { GlyphName } from '@/ui/glyphs/registry'
+
 export interface Topic {
   id: string
-  emoji: string
+  icon: GlyphName
   title: string
   description: string
   tags: string[]
@@ -14,7 +16,7 @@ export interface Topic {
 export interface CoffeeType {
   id: string
   name: string
-  emoji: string
+  icon: GlyphName
   personality: string
   /** Shown once picked. */
   analysis: string
@@ -25,7 +27,7 @@ export interface CoffeeType {
 export interface MeetingType {
   id: 'video' | 'phone' | 'in-person' | 'async'
   label: string
-  emoji: string
+  icon: GlyphName
 }
 
 export const intro = {
@@ -42,12 +44,12 @@ export const brewing = {
     'Piercing premium coffee capsule...',
     'Brewing your perfect espresso...',
     'Adding final aromatic touches...',
-    'Your Nescafé is ready! ☕',
+    'Your Nescafé is ready! :coffee:',
   ],
   /** ms between steps; the last step is "ready". */
   stepInterval: 800,
-  warmingReading: '🌡️ 75°C | 15 bar pressure',
-  hotReading: '🌡️ 85°C | 15 bar pressure',
+  warmingReading: ':thermometer: 75°C | 15 bar pressure',
+  hotReading: ':thermometer: 85°C | 15 bar pressure',
   rebrew: 'Brew Another',
   rebrewHint: 'Click to brew more!',
 }
@@ -63,7 +65,7 @@ export const topicsTitle = 'What would you like to discuss?'
 export const topics: Topic[] = [
   {
     id: 'startup',
-    emoji: '🚀',
+    icon: 'rocket',
     title: 'Startup Strategy Chat',
     description:
       "I'll share insights from my YC journey and 8-digit product exit. Let's talk product roadmap, scaling, and how to avoid the classic startup mistakes!",
@@ -71,7 +73,7 @@ export const topics: Topic[] = [
   },
   {
     id: 'architecture',
-    emoji: '💻',
+    icon: 'laptop',
     title: 'Tech Architecture Review',
     description:
       'I love diving deep into tech stacks! Let me help you choose the right architecture for your vision. No more "it depends" answers!',
@@ -79,7 +81,7 @@ export const topics: Topic[] = [
   },
   {
     id: 'fintech',
-    emoji: '💰',
+    icon: 'money',
     title: 'Fintech Deep Dive',
     description:
       "Currently leading fintech innovation at Mosambee. I can share what actually works in payments and financial products (spoiler: it's complicated).",
@@ -87,7 +89,7 @@ export const topics: Topic[] = [
   },
   {
     id: 'product',
-    emoji: '🎯',
+    icon: 'target',
     title: 'Product & Team Building',
     description:
       "I've built teams and products that scale. Let's discuss how to turn your idea into something people actually love (not just tolerate).",
@@ -95,7 +97,7 @@ export const topics: Topic[] = [
   },
   {
     id: 'brainstorm',
-    emoji: '🧠',
+    icon: 'brain',
     title: 'Brainstorming Session',
     description:
       'Got a crazy idea? Perfect! I specialize in turning "that\'s impossible" into "why didn\'t we think of this sooner?" Let\'s ideate!',
@@ -103,7 +105,7 @@ export const topics: Topic[] = [
   },
   {
     id: 'crisis',
-    emoji: '🔥',
+    icon: 'fire',
     title: 'Crisis Management',
     description:
       "Server down? Team revolt? Investors panicking? Been there, survived that. Let's fix it over coffee (virtual hugs included).",
@@ -121,75 +123,75 @@ export const coffeeTypes: CoffeeType[] = [
   {
     id: 'espresso',
     name: 'Espresso',
-    emoji: '☕',
+    icon: 'coffee',
     personality: 'Quick & Intense',
     analysis:
-      "Ah, an espresso person! You're probably the type who ships code fast and asks questions later. I like your style! 🚀",
+      "Ah, an espresso person! You're probably the type who ships code fast and asks questions later. I like your style! :rocket:",
     booked:
-      "Perfect! I'm excited to chat with a fellow espresso enthusiast. Let's make this meeting as intense as your coffee! ☕⚡",
+      "Perfect! I'm excited to chat with a fellow espresso enthusiast. Let's make this meeting as intense as your coffee! :coffee::zap:",
   },
   {
     id: 'latte',
     name: 'Latte',
-    emoji: '🥛',
+    icon: 'milk',
     personality: 'Smooth Operator',
     analysis:
-      "Latte lover! You appreciate the finer things and probably write beautiful, well-documented code. We'll get along great! ✨",
+      "Latte lover! You appreciate the finer things and probably write beautiful, well-documented code. We'll get along great! :sparkles:",
     booked:
-      'Awesome! Looking forward to a smooth conversation with a latte lover. This will be perfectly balanced! ☕✨',
+      'Awesome! Looking forward to a smooth conversation with a latte lover. This will be perfectly balanced! :coffee::sparkles:',
   },
   {
     id: 'americano',
     name: 'Americano',
-    emoji: '☕',
+    icon: 'coffee',
     personality: 'No-Nonsense',
     analysis:
-      "Americano - straight to the point! You're probably a backend developer who loves clean, efficient solutions. Respect! 💪",
+      "Americano - straight to the point! You're probably a backend developer who loves clean, efficient solutions. Respect! :strong:",
     booked:
-      "Great! Can't wait to have a straightforward chat with an americano person. No fluff, just results! ☕💪",
+      "Great! Can't wait to have a straightforward chat with an americano person. No fluff, just results! :coffee::strong:",
   },
   {
     id: 'cappuccino',
     name: 'Cappuccino',
-    emoji: '☕',
+    icon: 'coffee',
     personality: 'Balanced Perfectionist',
     analysis:
-      'Cappuccino connoisseur! You balance art and science perfectly. Bet you write tests AND make them readable! 🎯',
+      'Cappuccino connoisseur! You balance art and science perfectly. Bet you write tests AND make them readable! :target:',
     booked:
-      'Excellent! Ready for a perfectly balanced discussion with a cappuccino connoisseur! ☕🎯',
+      'Excellent! Ready for a perfectly balanced discussion with a cappuccino connoisseur! :coffee::target:',
   },
   {
     id: 'cold-brew',
     name: 'Cold Brew',
-    emoji: '🧊',
+    icon: 'ice',
     personality: 'Cool & Patient',
     analysis:
-      "Cold brew enthusiast! You're patient, methodical, and probably the person who actually reads documentation. Legend! 🧊",
+      "Cold brew enthusiast! You're patient, methodical, and probably the person who actually reads documentation. Legend! :ice:",
     booked:
-      'Amazing! Looking forward to a chill conversation with a cold brew enthusiast. Patience pays off! ☕🧊',
+      'Amazing! Looking forward to a chill conversation with a cold brew enthusiast. Patience pays off! :coffee::ice:',
   },
   {
     id: 'frappuccino',
     name: 'Frappuccino',
-    emoji: '🥤',
+    icon: 'frappe',
     personality: 'Fun & Creative',
     analysis:
-      "Frappuccino fan! You're not afraid to be different and probably have the most creative solutions. Let's innovate! 🌈",
+      "Frappuccino fan! You're not afraid to be different and probably have the most creative solutions. Let's innovate! :rainbow:",
     booked:
-      "Fantastic! Ready for a creative session with a frappuccino fan. Let's blend some wild ideas! ☕🌈",
+      "Fantastic! Ready for a creative session with a frappuccino fan. Let's blend some wild ideas! :coffee::rainbow:",
   },
 ]
 
 export const meetingTypes: MeetingType[] = [
-  { id: 'video', label: 'Video Call', emoji: '📹' },
-  { id: 'phone', label: 'Phone Call', emoji: '📞' },
-  { id: 'in-person', label: 'In Person', emoji: '🤝' },
-  { id: 'async', label: 'Async Chat', emoji: '💬' },
+  { id: 'video', label: 'Video Call', icon: 'video' },
+  { id: 'phone', label: 'Phone Call', icon: 'call' },
+  { id: 'in-person', label: 'In Person', icon: 'handshake' },
+  { id: 'async', label: 'Async Chat', icon: 'chat' },
 ]
 
 export const form = {
   title: 'Schedule Your Coffee Chat',
-  subtitle: "Let's turn caffeine into code and ideas into reality! ☕→💡",
+  subtitle: "Let's turn caffeine into code and ideas into reality! :coffee:→:idea:",
   name: { label: 'Your Name', placeholder: 'What should I call you?' },
   email: { label: 'Email', placeholder: 'your.awesome@email.com' },
   when: {
@@ -198,13 +200,13 @@ export const form = {
   },
   meetingType: 'Meeting Type',
   message: {
-    label: "What's brewing in your mind? 🧠",
+    label: "What's brewing in your mind? :brain:",
     placeholder:
       "Tell me about your project, crazy idea, or what's keeping you up at night (besides coffee)...",
   },
-  submit: "☕ Let's Chat Over Coffee!",
+  submit: ":coffee: Let's Chat Over Coffee!",
   emailInstead: 'Email Instead',
-  reassurance: "Don't worry, I don't bite! Unless you prefer PHP over JavaScript 😄",
+  reassurance: "Don't worry, I don't bite! Unless you prefer PHP over JavaScript :grin:",
   errors: {
     name: 'I need a name to write on the cup.',
     email: 'An email so I can send the invite.',
@@ -215,16 +217,16 @@ export const form = {
 export const notifications = {
   topicPicked: (title: string) => ({
     title: 'Great Choice!',
-    body: `Sounds awesome! I'd love to chat about ${title.toLowerCase()}. Hit the coffee button below! ☕`,
+    body: `Sounds awesome! I'd love to chat about ${title.toLowerCase()}. Hit the coffee button below! :coffee:`,
   }),
   coffeePicked: (analysis: string) => ({ title: 'Coffee Choice Noted!', body: analysis }),
   missingInfo: {
     title: 'Oops! Missing Info',
-    body: 'I need at least your name and email to brew this connection! ☕',
+    body: 'I need at least your name and email to brew this connection! :coffee:',
   },
   booked: {
     title: 'Coffee Chat Scheduled!',
-    fallback: "Perfect! I'm excited to chat with you. Let's brew some amazing ideas together! ☕",
+    fallback: "Perfect! I'm excited to chat with you. Let's brew some amazing ideas together! :coffee:",
     openMail: 'Open Mail',
   },
 }
@@ -235,6 +237,6 @@ export const topicMessage = (topic: Topic) =>
 
 /** Subject + body for the mailto fallback. */
 export const mailDraft = {
-  subject: 'Coffee chat? ☕',
+  subject: 'Coffee chat? :coffee:',
   body: (lines: Array<string | false | null | undefined>) => lines.filter(Boolean).join('\n'),
 }

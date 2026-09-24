@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Monitor, FolderGit2 } from '@lucide/vue'
+import { Monitor } from '@lucide/vue'
 
 import { settings as copy } from '@/content/mobile'
 import { usePlatform } from '@/composables/usePlatform'
 import { usePWAStore } from '@/stores/pwa'
-import { UiListGroup, UiListRow } from '@/ui'
+import { BrandIcon, UiListGroup, UiListRow } from '@/ui'
 
 import SettingsPage from '../SettingsPage.vue'
 
@@ -23,8 +23,8 @@ const openSource = () => window.open(copy.sourceUrl, '_blank', 'noopener')
     </UiListGroup>
 
     <UiListGroup>
-      <UiListRow title="View Source on GitHub" tint="var(--sys-graphite)" chevron @select="openSource">
-        <template #icon><FolderGit2 /></template>
+      <UiListRow title="View Source on GitHub" chevron @select="openSource">
+        <template #icon><BrandIcon name="github" :size="24" decorative class="text-ios-label" /></template>
       </UiListRow>
       <UiListRow title="Offline Support" :detail="pwa.offlineReady ? 'Ready' : 'Not cached yet'" />
       <UiListRow title="Build" :detail="buildMode" />

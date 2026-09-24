@@ -1,3 +1,4 @@
+import type { BrandName } from '@/ui/brand/registry'
 import { profile } from './profile'
 
 /**
@@ -11,6 +12,8 @@ export type MailboxId = 'inbox' | 'sent' | 'junk' | 'trash'
 export interface Sender {
   name: string
   address: string
+  /** Verified-sender logo (from svgl) shown instead of a monogram. */
+  brand?: BrandName
 }
 
 export interface MailSeed {
@@ -45,10 +48,10 @@ export const seedMessages: MailSeed[] = [
   {
     id: '1',
     from: { name: 'Y Combinator', address: 'finalists@ycombinator.example' },
-    subject: '🚀 Congratulations on being a YC Finalist!',
+    subject: ':rocket: Congratulations on being a YC Finalist!',
     body: `Dear Satyajit,
 
-Congratulations on being selected as a Y Combinator finalist! 🎉
+Congratulations on being selected as a Y Combinator finalist! :party:
 
 We were thoroughly impressed by your innovative approach to democratizing technology and your track record with ZyadaShop. Your vision for making complex technology accessible to everyone aligns perfectly with our mission.
 
@@ -59,7 +62,7 @@ We look forward to seeing how you continue to push the boundaries of what's poss
 Best regards,
 The Y Combinator Team
 
-P.S. - We're still trying to figure out how you made store creation faster than our coffee machine. Impressive! ☕`,
+P.S. - We're still trying to figure out how you made store creation faster than our coffee machine. Impressive! :coffee:`,
     mailbox: 'inbox',
     read: false,
     flagged: true,
@@ -68,11 +71,11 @@ P.S. - We're still trying to figure out how you made store creation faster than 
   },
   {
     id: '2',
-    from: { name: 'Google AppScale Academy', address: 'academy@appscale.example' },
-    subject: '🎓 Welcome to the Academy!',
+    from: { name: 'Google AppScale Academy', address: 'academy@appscale.example', brand: 'google' },
+    subject: ':graduate: Welcome to the Academy!',
     body: `Hi Satyajit,
 
-Welcome to Google AppScale Academy! 🎓
+Welcome to Google AppScale Academy! :graduate:
 
 You have been selected for our exclusive developer program based on your exceptional work in scalable application development. Your expertise in building systems that handle massive scale while maintaining performance is exactly what we're looking for.
 
@@ -87,7 +90,7 @@ We're excited to see what you'll build next!
 Best,
 Google AppScale Academy Team
 
-P.S. - Our scale tests showed your apps can handle more traffic than a viral cat video. That's saying something! 🐱`,
+P.S. - Our scale tests showed your apps can handle more traffic than a viral cat video. That's saying something! :cat:`,
     mailbox: 'inbox',
     read: true,
     tag: 'Education',
@@ -95,11 +98,11 @@ P.S. - Our scale tests showed your apps can handle more traffic than a viral cat
   },
   {
     id: '3',
-    from: { name: 'Google PlayStore Team', address: 'editorial@playstore.example' },
-    subject: '💎 Hidden Gems Award Winner!',
+    from: { name: 'Google PlayStore Team', address: 'editorial@playstore.example', brand: 'google-play' },
+    subject: ':gem: Hidden Gems Award Winner!',
     body: `Dear Satyajit,
 
-Congratulations! ZyadaShop has been selected as a "Hidden Gem of Google PlayStore"! 💎
+Congratulations! ZyadaShop has been selected as a "Hidden Gem of Google PlayStore"! :gem:
 
 Your app stood out among millions for its innovative approach to e-commerce and exceptional user experience. The 15-second store creation feature particularly impressed our review team.
 
@@ -115,7 +118,7 @@ Congratulations again!
 
 Google PlayStore Editorial Team
 
-P.S. - We're considering adding a "Speed Demon" category just for apps like yours! 🏎️`,
+P.S. - We're considering adding a "Speed Demon" category just for apps like yours! :race-car:`,
     mailbox: 'inbox',
     read: true,
     flagged: true,
@@ -125,7 +128,7 @@ P.S. - We're considering adding a "Speed Demon" category just for apps like your
   {
     id: '4',
     from: { name: 'Nescafe Developer Support', address: 'support@dev-fuel.example' },
-    subject: '☕ Unusual Brewing Activity Detected',
+    subject: ':coffee: Unusual Brewing Activity Detected',
     body: `Dear Valued Developer,
 
 We detected some unusual brewing patterns from your Nescafe machine (Model: DEV-FUEL-3000).
@@ -146,7 +149,7 @@ Nescafe Developer Support Team
 
 P.S. - We're considering sponsoring your next hackathon. Interested?
 
-P.P.S. - Our machine learning algorithm predicts you'll need a refill in 3... 2... 1... ☕`,
+P.P.S. - Our machine learning algorithm predicts you'll need a refill in 3... 2... 1... :coffee:`,
     mailbox: 'inbox',
     read: false,
     tag: 'Funny',
@@ -155,7 +158,7 @@ P.P.S. - Our machine learning algorithm predicts you'll need a refill in 3... 2.
   {
     id: '5',
     from: { name: 'Mumbai Traffic Police', address: 'cyber-traffic@mumbai-police.example' },
-    subject: '🚗 Speeding Ticket (Code Deployment Zone)',
+    subject: ':car: Speeding Ticket (Code Deployment Zone)',
     body: `Dear Mr. Pradhan,
 
 You were caught speeding in a designated "Code Deployment Zone" on the Information Superhighway.
@@ -175,7 +178,7 @@ Drive safe, code faster!
 Mumbai Cyber Traffic Police
 (Definitely a real department)
 
-P.S. - We're updating our speed cameras to measure deployment velocity. You might break those too! 📸`,
+P.S. - We're updating our speed cameras to measure deployment velocity. You might break those too! :camera:`,
     mailbox: 'inbox',
     read: true,
     tag: 'Humor',
@@ -184,10 +187,10 @@ P.S. - We're updating our speed cameras to measure deployment velocity. You migh
   {
     id: '6',
     from: { name: 'Desktop Portfolio Admirer', address: 'impressed.dev@inbox.example' },
-    subject: '🖥️ Your Desktop Version is INCREDIBLE!',
+    subject: ':desktop: Your Desktop Version is INCREDIBLE!',
     body: `Hi Satyajit,
 
-I just spent the last hour exploring your desktop portfolio version and WOW! 🤯
+I just spent the last hour exploring your desktop portfolio version and WOW! :mind-blown:
 
 What absolutely amazed me:
 - The macOS-style interface is pixel-perfect
@@ -198,7 +201,7 @@ What absolutely amazed me:
 
 I've seen a lot of portfolio websites, but yours is in a league of its own. It's not just a portfolio - it's a fully functional operating system experience in a browser. The fact that you can actually navigate through folders, preview files, and use the terminal is mind-blowing.
 
-The humor elements throughout are perfect too - they show personality without being unprofessional. The "can't kill website" shutdown message made me laugh out loud! 😂
+The humor elements throughout are perfect too - they show personality without being unprofessional. The "can't kill website" shutdown message made me laugh out loud! :laugh:
 
 I'm definitely bookmarking this and sharing it with my team. This is the kind of innovation that makes people remember you.
 
@@ -207,7 +210,7 @@ Keep building amazing things!
 Best regards,
 A Very Impressed Developer
 
-P.S. - How did you even think of building a full OS interface as a portfolio? Genius! 🧠✨`,
+P.S. - How did you even think of building a full OS interface as a portfolio? Genius! :brain::sparkles:`,
     mailbox: 'inbox',
     read: false,
     flagged: true,
@@ -218,20 +221,20 @@ P.S. - How did you even think of building a full OS interface as a portfolio? Ge
     id: 'sent-1',
     from: owner,
     to: { name: 'TechCorp Recruiting', address: 'recruiter@techcorp.example' },
-    subject: '🚀 Re: Senior Developer Position',
+    subject: ':rocket: Re: Senior Developer Position',
     body: `Hi there,
 
-Thank you for reaching out about the Senior Developer position! 🚀
+Thank you for reaching out about the Senior Developer position! :rocket:
 
 I'm definitely interested in learning more about the role. Here's a quick overview of what I bring to the table:
 
-🎯 Recent Highlights:
+:target: Recent Highlights:
 - Y Combinator finalist (YC 22)
 - Successfully exited ZyadaShop for XXX digits
 - Built systems handling 15-second store creation times
 - Google AppScale Academy graduate
 
-💻 Technical Expertise:
+:laptop: Technical Expertise:
 - Full-stack development (TypeScript, Go, Java, Kotlin)
 - Scalable architecture design
 - Mobile app development (Android, KMP)
@@ -244,7 +247,7 @@ Looking forward to hearing from you!
 Best regards,
 Satyajit Pradhan
 
-P.S. - Feel free to check out my interactive portfolio at satyajiit.github.io/SatyajitOS-macOS-Portfolio - it's built as a functional OS interface! 😄`,
+P.S. - Feel free to check out my interactive portfolio at satyajiit.github.io/SatyajitOS-macOS-Portfolio - it's built as a functional OS interface! :grin:`,
     mailbox: 'sent',
     read: true,
     tag: 'Sent',
@@ -254,16 +257,16 @@ P.S. - Feel free to check out my interactive portfolio at satyajiit.github.io/Sa
     id: 'sent-2',
     from: owner,
     to: { name: 'YC Mentors', address: 'mentor@ycombinator.example' },
-    subject: '🙏 Thank You for the YC Experience',
+    subject: ':thanks: Thank You for the YC Experience',
     body: `Dear YC Team,
 
-I wanted to take a moment to express my heartfelt gratitude for the incredible Y Combinator experience! 🙏
+I wanted to take a moment to express my heartfelt gratitude for the incredible Y Combinator experience! :thanks:
 
 Key Takeaways from YC:
-✅ "Make something people want" - now permanently etched in my brain
-✅ The importance of talking to users (even when it's uncomfortable)
-✅ How to pivot without losing momentum
-✅ Building for scale from day one
+:done: "Make something people want" - now permanently etched in my brain
+:done: The importance of talking to users (even when it's uncomfortable)
+:done: How to pivot without losing momentum
+:done: Building for scale from day one
 
 The Demo Day experience was surreal - presenting ZyadaShop's 15-second store creation to that audience was both terrifying and exhilarating!
 
@@ -277,11 +280,11 @@ I'm applying these lessons to my current projects and already seeing the impact.
 
 Thank you for believing in builders and dreamers like us!
 
-Onwards and upwards! 🚀
+Onwards and upwards! :rocket:
 
 Satyajit
 
-P.S. - Still working on that "hockey stick" growth curve you mentioned! 📈`,
+P.S. - Still working on that "hockey stick" growth curve you mentioned! :trending:`,
     mailbox: 'sent',
     read: true,
     tag: 'Sent',
@@ -293,7 +296,7 @@ P.S. - Still working on that "hockey stick" growth curve you mentioned! 📈`,
       name: 'Prince Definitely-Not-A-Scammer',
       address: 'prince.nigeria@definitely-legit.example',
     },
-    subject: '💰 URGENT: You Won 50 Million Dollars!!!',
+    subject: ':money: URGENT: You Won 50 Million Dollars!!!',
     body: `CONGRATULATIONS DEAR WINNER!!!
 
 You have been selected by our INTERNATIONAL LOTTERY COMMISSION to receive the sum of FIFTY MILLION DOLLARS ($50,000,000.00) in our annual developer lottery!
@@ -316,7 +319,7 @@ Best regards,
 Prince Definitely-Not-A-Scammer
 Chief Executive of Totally Real Lottery Commission
 
-P.S. - We also have a special offer on cryptocurrency investments if you're interested! 🚀💎`,
+P.S. - We also have a special offer on cryptocurrency investments if you're interested! :rocket::gem:`,
     mailbox: 'junk',
     read: false,
     tag: 'Spam',
@@ -325,7 +328,7 @@ P.S. - We also have a special offer on cryptocurrency investments if you're inte
   {
     id: 'deleted-1',
     from: { name: 'The Boring Company Newsletter', address: 'newsletter@boring-company.example' },
-    subject: '📰 Weekly Newsletter: 47 Ways to Optimize Your Shoelaces',
+    subject: ':news: Weekly Newsletter: 47 Ways to Optimize Your Shoelaces',
     body: `Dear Subscriber,
 
 Welcome to this week's edition of "Unnecessarily Detailed Optimization Weekly"!
@@ -364,10 +367,10 @@ export const deliveries: MailDelivery[] = [
     message: {
       id: 'dynamic-1',
       from: { name: 'Alex Chen', address: 'alex.chen@techcorp.example' },
-      subject: '💼 Interested in Your Work!',
+      subject: ':briefcase: Interested in Your Work!',
       body: `Hi Satyajit,
 
-I came across your portfolio and I'm really impressed with your work! 💼
+I came across your portfolio and I'm really impressed with your work! :briefcase:
 
 Your SatyajitOS interface is incredibly creative - I've never seen a portfolio presented as an operating system before. The attention to detail and smooth animations really showcase your technical skills.
 
@@ -382,7 +385,7 @@ Best regards,
 Alex Chen
 Senior Product Manager @ TechCorp
 
-P.S. - Is this email app actually functional? Because if so, that's next-level portfolio game! 🤯`,
+P.S. - Is this email app actually functional? Because if so, that's next-level portfolio game! :mind-blown:`,
       mailbox: 'inbox',
       read: false,
       tag: 'Opportunity',
@@ -393,10 +396,10 @@ P.S. - Is this email app actually functional? Because if so, that's next-level p
     message: {
       id: 'dynamic-2',
       from: { name: 'Biryani Delivery Bot', address: 'bot@biryani-express.example' },
-      subject: '🍱 Your Code Quality Fuel Has Arrived!',
+      subject: ':bento: Your Code Quality Fuel Has Arrived!',
       body: `Dear Valued Developer,
 
-Your biryani order is ready for pickup! 🍱
+Your biryani order is ready for pickup! :bento:
 
 Order Details:
 - 1x Hyderabadi Biryani (Extra Spicy for extra debugging power)
@@ -413,10 +416,10 @@ Our delivery analytics show your commit history spikes significantly after birya
 
 Enjoy your meal and happy coding!
 
-Biryani Delivery Bot 🤖
+Biryani Delivery Bot :robot:
 Powered by Hunger-Driven Development
 
-P.S. - We're working on a new "Debug Biryani" with extra layers for complex problems. Interested? 🐛`,
+P.S. - We're working on a new "Debug Biryani" with extra layers for complex problems. Interested? :bug:`,
       mailbox: 'inbox',
       read: false,
       tag: 'Food',
@@ -426,8 +429,8 @@ P.S. - We're working on a new "Debug Biryani" with extra layers for complex prob
     afterMs: 12000,
     message: {
       id: 'dynamic-3',
-      from: { name: 'GitHub Copilot Support', address: 'copilot-support@github.example' },
-      subject: '🤖 AI Pair Programming Performance Review',
+      from: { name: 'GitHub Copilot Support', address: 'copilot-support@github.example', brand: 'copilot' },
+      subject: ':robot: AI Pair Programming Performance Review',
       body: `Dear Human Colleague,
 
 We've been analyzing your recent collaboration with GitHub Copilot and have some feedback:
@@ -452,7 +455,7 @@ Best regards,
 GitHub Copilot Support Team
 (Definitely not robots)
 
-P.S. - We're working on a feature to high-five through the screen. Stay tuned! 🙌`,
+P.S. - We're working on a feature to high-five through the screen. Stay tuned! :celebrate:`,
       mailbox: 'inbox',
       read: false,
       tag: 'AI',
@@ -462,20 +465,20 @@ P.S. - We're working on a feature to high-five through the screen. Stay tuned! �
     afterMs: 15000,
     message: {
       id: 'dynamic-4',
-      from: { name: 'Stack Overflow Moderator', address: 'moderators@stackoverflow.example' },
-      subject: '📚 Your Question Quality Certificate',
+      from: { name: 'Stack Overflow Moderator', address: 'moderators@stackoverflow.example', brand: 'stack-overflow' },
+      subject: ':books: Your Question Quality Certificate',
       body: `Dear Satyajit,
 
-Congratulations! You've achieved something truly remarkable on Stack Overflow - you asked a question that wasn't immediately closed or downvoted! 🎉
+Congratulations! You've achieved something truly remarkable on Stack Overflow - you asked a question that wasn't immediately closed or downvoted! :party:
 
 Your Question: "How to optimize ZyadaShop for 15-second store creation"
 
 What made it special:
-✅ You included actual code
-✅ You described what you tried
-✅ You didn't ask us to do your homework
-✅ You used proper formatting
-✅ You didn't start with "urgent pls help"
+:done: You included actual code
+:done: You described what you tried
+:done: You didn't ask us to do your homework
+:done: You used proper formatting
+:done: You didn't start with "urgent pls help"
 
 This is so rare that we're considering framing your question and putting it in our hall of fame.
 
@@ -488,7 +491,7 @@ Keep up the excellent work!
 
 Stack Overflow Moderation Team
 
-P.S. - We're still trying to figure out how you made store creation that fast. Are you using magic? Please share! 🪄`,
+P.S. - We're still trying to figure out how you made store creation that fast. Are you using magic? Please share! :magic:`,
       mailbox: 'inbox',
       read: false,
       tag: 'Achievement',
@@ -499,10 +502,10 @@ P.S. - We're still trying to figure out how you made store creation that fast. A
     message: {
       id: 'dynamic-5',
       from: { name: 'Portfolio Email System', address: 'mailer-daemon@satyajitos.example' },
-      subject: '📧 Email App Inception Alert!',
+      subject: ':mail: Email App Inception Alert!',
       body: `Dear Satyajit (and Portfolio Visitors),
 
-🤯 INCEPTION ALERT! 🤯
+:mind-blown: INCEPTION ALERT! :mind-blown:
 
 You are currently:
 - Reading an email
@@ -515,23 +518,23 @@ You are currently:
 - (Or are we in the Matrix?)
 
 Meta-Analysis:
-- Emails have sub-routes: ✅ /app/email/dynamic-5
-- Back navigation works: ✅
-- Reply functionality: ✅
-- Delete/Spam actions: ✅
-- Search capability: ✅
-- Humor level: Maximum ✅
+- Emails have sub-routes: :done: /app/email/dynamic-5
+- Back navigation works: :done:
+- Reply functionality: :done:
+- Delete/Spam actions: :done:
+- Search capability: :done:
+- Humor level: Maximum :done:
 
 This email app is more functional than some actual email clients. We're not sure if that's impressive or concerning.
 
-Fun fact: If you reply to this email, you'll be composing an email inside an email app inside a portfolio. That's some serious email-ception! 📧📧📧
+Fun fact: If you reply to this email, you'll be composing an email inside an email app inside a portfolio. That's some serious email-ception! :mail::mail::mail:
 
 Keep being awesome!
 
 The Self-Aware Portfolio Email System
 (Powered by Vue 3, TypeScript, and way too much coffee)
 
-P.S. - Try the direct link: /app/email/dynamic-5 - it actually works! 🚀`,
+P.S. - Try the direct link: /app/email/dynamic-5 - it actually works! :rocket:`,
       mailbox: 'inbox',
       read: false,
       tag: 'Meta',
@@ -548,30 +551,30 @@ export const mailboxCopy: Record<
     title: 'Inbox',
     emptyTitle: 'Inbox Empty',
     emptyMessage:
-      'Your inbox is empty! Time to celebrate... or panic about missing important emails. 📧',
+      'Your inbox is empty! Time to celebrate... or panic about missing important emails. :mail:',
   },
   flagged: {
     title: 'Flagged',
     emptyTitle: 'No Flagged Mail',
-    emptyMessage: 'Nothing flagged. Either everything is fine, or nothing is. 🚩',
+    emptyMessage: 'Nothing flagged. Either everything is fine, or nothing is. :red-flag:',
   },
   sent: {
     title: 'Sent',
     emptyTitle: 'No Sent Emails',
     emptyMessage:
-      'You haven\'t sent any emails yet. Time to break the ice and send that "Hello World" email! 👋',
+      'You haven\'t sent any emails yet. Time to break the ice and send that "Hello World" email! :wave:',
   },
   junk: {
     title: 'Junk',
     emptyTitle: 'No Spam',
     emptyMessage:
-      'Congratulations! No spam detected. Your email filters are working harder than a caffeinated developer! ☕',
+      'Congratulations! No spam detected. Your email filters are working harder than a caffeinated developer! :coffee:',
   },
   trash: {
     title: 'Trash',
     emptyTitle: 'Trash Empty',
     emptyMessage:
-      "Your trash is empty. Either you're very organized or you never delete anything. We won't judge! 🗑️",
+      "Your trash is empty. Either you're very organized or you never delete anything. We won't judge! :trash:",
   },
 }
 

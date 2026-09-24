@@ -4,7 +4,7 @@ import { computed } from 'vue'
 
 import type { TagColor } from '@/content/files'
 import { exit, spring } from '@/design/motion'
-import { UiButton } from '@/ui'
+import { IconText, UiButton } from '@/ui'
 
 import { funStatsOf, insightOf, kindLabel, type Item } from '../fs'
 
@@ -65,7 +65,7 @@ const where = computed(() => props.item?.path.split('/').slice(0, -1).join('/') 
               <dd>{{ item.modified ?? '--' }}</dd>
               <template v-if="item.description">
                 <dt>About:</dt>
-                <dd>{{ item.description }}</dd>
+                <dd><IconText :text="item.description" /></dd>
               </template>
             </dl>
           </details>
@@ -80,12 +80,12 @@ const where = computed(() => props.item?.path.split('/').slice(0, -1).join('/') 
 
           <details open>
             <summary>Insider Info:</summary>
-            <p class="text-label">{{ insightOf(item) }}</p>
+            <p class="text-label"><IconText :text="insightOf(item)" /></p>
           </details>
 
           <details v-if="item.tooltip" open>
             <summary>Comments:</summary>
-            <p class="comment">{{ item.tooltip }}</p>
+            <p class="comment"><IconText :text="item.tooltip" /></p>
           </details>
 
           <details v-if="stats">

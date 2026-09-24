@@ -12,7 +12,7 @@ import {
   topics,
   topicsTitle,
 } from '@/content/coffee'
-import { IosButton, IosNavBar, UiAppIcon, UiListGroup, UiListRow, UiProgress, UiTextField } from '@/ui'
+import { Glyph, IconText, IosButton, IosNavBar, UiAppIcon, UiListGroup, UiListRow, UiProgress, UiTextField } from '@/ui'
 
 import { useCoffeeBooking } from './useCoffeeBooking'
 
@@ -53,14 +53,14 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
             <UiAppIcon name="coffee" :size="56" />
           </button>
           <div class="min-w-0">
-            <h2 class="text-ios-headline text-ios-label">{{ intro.title }}</h2>
-            <p class="mt-1 text-ios-subheadline text-ios-label-secondary">{{ intro.body }}</p>
+            <h2 class="text-ios-headline text-ios-label"><IconText :text="intro.title" /></h2>
+            <p class="mt-1 text-ios-subheadline text-ios-label-secondary"><IconText :text="intro.body" /></p>
           </div>
         </div>
         <UiProgress class="mt-4" :value="booking.brewProgress.value" label="Brewing" />
-        <p class="mt-2 text-ios-footnote text-ios-label">{{ booking.brewMessage.value }}</p>
+        <p class="mt-2 text-ios-footnote text-ios-label"><IconText :text="booking.brewMessage.value" /></p>
         <p class="text-ios-caption-1 text-ios-label-secondary">
-          {{ booking.isBrewing.value ? booking.brewReading.value : brewing.machine }}
+          <IconText :text="booking.isBrewing.value ? booking.brewReading.value : brewing.machine" />
         </p>
       </section>
 
@@ -70,7 +70,7 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
           :key="stat.label"
           class="flex flex-col-reverse justify-end rounded-ios-group bg-ios-grouped-secondary px-3 py-3 text-center"
         >
-          <dt class="text-ios-caption-1 text-ios-label-secondary">{{ stat.label }}</dt>
+          <dt class="text-ios-caption-1 text-ios-label-secondary"><IconText :text="stat.label" /></dt>
           <dd class="tabular text-ios-title-3 font-bold text-ios-label">{{ stat.value }}</dd>
         </div>
       </dl>
@@ -84,13 +84,13 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
             @click="booking.pickTopic(item)"
           >
             <span class="w-7 shrink-0 pt-0.5 text-center text-ios-title-3" aria-hidden="true">
-              {{ item.emoji }}
+              <Glyph :name="item.icon" />
             </span>
             <span class="body flex min-w-0 flex-1 gap-2 pr-4">
               <span class="min-w-0 flex-1">
-                <span class="block text-ios-headline text-ios-label">{{ item.title }}</span>
+                <span class="block text-ios-headline text-ios-label"><IconText :text="item.title" /></span>
                 <span class="mt-0.5 block text-ios-footnote text-ios-label-secondary">
-                  {{ item.description }}
+                  <IconText :text="item.description" />
                 </span>
                 <span class="mt-2 flex flex-wrap gap-1">
                   <span
@@ -127,7 +127,7 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
           @select="booking.pickCoffee(item)"
         >
           <template #icon>
-            <span class="text-ios-body" aria-hidden="true">{{ item.emoji }}</span>
+            <span class="text-ios-body" aria-hidden="true"><Glyph :name="item.icon" /></span>
           </template>
           <template #accessory>
             <Check
@@ -143,9 +143,9 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
       <section class="mx-4 mb-6 flex flex-col gap-4" aria-labelledby="form-title">
         <div class="px-4">
           <h2 id="form-title" class="text-ios-title-3 font-semibold text-ios-label">
-            {{ form.title }}
+            <IconText :text="form.title" />
           </h2>
-          <p class="text-ios-footnote text-ios-label-secondary">{{ form.subtitle }}</p>
+          <p class="text-ios-footnote text-ios-label-secondary"><IconText :text="form.subtitle" /></p>
         </div>
         <UiTextField
           v-model="details.name"
@@ -173,7 +173,7 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
         />
         <fieldset class="flex flex-col gap-1.5">
           <legend class="mb-1.5 text-callout font-medium text-label-secondary">
-            {{ form.meetingType }}
+            <IconText :text="form.meetingType" />
           </legend>
           <div role="radiogroup" :aria-label="form.meetingType" class="grid grid-cols-2 gap-2">
             <button
@@ -185,8 +185,8 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
               class="meeting focus-ring flex h-12 items-center gap-2 rounded-xl bg-ios-grouped-secondary px-3 text-ios-subheadline text-ios-label"
               @click="details.meetingType = type.id"
             >
-              <span aria-hidden="true">{{ type.emoji }}</span>
-              <span class="truncate">{{ type.label }}</span>
+              <span aria-hidden="true"><Glyph :name="type.icon" /></span>
+              <span class="truncate"><IconText :text="type.label" /></span>
             </button>
           </div>
         </fieldset>
@@ -199,7 +199,7 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
           :placeholder="form.message.placeholder"
         />
         <p class="px-4 text-center text-ios-footnote text-ios-label-secondary">
-          {{ form.reassurance }}
+          <IconText :text="form.reassurance" />
         </p>
       </section>
     </div>
@@ -208,14 +208,14 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
       class="material-ios-bar flex shrink-0 flex-col gap-1 border-t border-ios-separator px-4 pb-[max(env(safe-area-inset-bottom),12px)] pt-3"
     >
       <IosButton :state="booking.state.value" loading-label="Booking" @click="booking.book">
-        {{ form.submit }}
+        <IconText :text="form.submit" />
       </IosButton>
       <button
         type="button"
         class="focus-ring h-11 rounded-xl text-ios-body text-accent active:opacity-50"
         @click="emailInstead"
       >
-        {{ form.emailInstead }}
+        <IconText :text="form.emailInstead" />
       </button>
     </footer>
   </div>

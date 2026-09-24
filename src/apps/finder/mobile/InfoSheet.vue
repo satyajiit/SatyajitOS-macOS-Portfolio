@@ -4,7 +4,7 @@ import { computed } from 'vue'
 
 import type { TagColor } from '@/content/files'
 import { exit, spring } from '@/design/motion'
-import { IosButton, UiListGroup, UiListRow } from '@/ui'
+import { IconText, IosButton, UiListGroup, UiListRow } from '@/ui'
 
 import ItemIcon from '../components/ItemIcon.vue'
 import TagDots from '../components/TagDots.vue'
@@ -93,7 +93,7 @@ function onDragEnd(_: PointerEvent, info: { offset: { y: number }; velocity: { y
         </UiListGroup>
 
         <UiListGroup header="Insider Info" :footer="item.tooltip ? `Pro tip: ${item.tooltip}` : undefined">
-          <li class="px-4 py-3 text-ios-body text-ios-label">{{ insightOf(item) }}</li>
+          <li class="px-4 py-3 text-ios-body text-ios-label"><IconText :text="insightOf(item)" /></li>
         </UiListGroup>
 
         <UiListGroup v-if="stats" header="Fun Stats">

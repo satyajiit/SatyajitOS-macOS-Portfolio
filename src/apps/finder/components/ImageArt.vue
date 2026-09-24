@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Annoyed, Flame, Meh, PersonStanding, Rocket } from '@lucide/vue'
 import { useId } from 'vue'
 
 import wallpaper from '@/assets/wallpapers/horizon-dark.webp'
@@ -90,7 +91,9 @@ const confetti = Array.from({ length: 36 }, (_, i) => ({
     <!-- Memes: top/bottom caption over a flat plate with a big reaction -->
     <g v-else-if="props.art === 'meme-first-try' || props.art === 'meme-meeting'">
       <rect width="400" height="300" :fill="props.art === 'meme-first-try' ? `url(#${id}-blue)` : `url(#${id}-gray)`" />
-      <text x="200" y="168" text-anchor="middle" font-size="110">{{ props.art === 'meme-first-try' ? '🤨' : '😴' }}</text>
+      <g transform="translate(145 78)">
+        <component :is="props.art === 'meme-first-try' ? Annoyed : Meh" :size="110" :color="paint.reactionFace" :stroke-width="1.6" />
+      </g>
       <g class="meme" text-anchor="middle" :fill="paint.memeInk" :stroke="paint.memeStroke" stroke-width="2.4" paint-order="stroke">
         <text x="200" y="48" font-size="30">{{ props.art === 'meme-first-try' ? 'WHEN THE CODE WORKS' : 'THIS MEETING' }}</text>
         <text x="200" y="276" :font-size="props.art === 'meme-first-try' ? 30 : 22">
@@ -102,8 +105,8 @@ const confetti = Array.from({ length: 36 }, (_, i) => ({
     <g v-else-if="props.art === 'meme-startup'">
       <rect width="200" height="300" :fill="`url(#${id}-blue)`" />
       <rect x="200" width="200" height="300" :fill="`url(#${id}-warm)`" />
-      <text x="100" y="178" text-anchor="middle" font-size="84">🚀</text>
-      <text x="300" y="178" text-anchor="middle" font-size="84">🔥</text>
+      <g transform="translate(58 108)"><Rocket :size="84" :color="paint.reactionRocket" :stroke-width="1.6" /></g>
+      <g transform="translate(258 108)"><Flame :size="84" :color="paint.reactionFlame" :stroke-width="1.6" /></g>
       <g class="meme" text-anchor="middle" :fill="paint.memeInk" :stroke="paint.memeStroke" stroke-width="2.2" paint-order="stroke">
         <text x="100" y="52" font-size="24">EXPECTATIONS</text>
         <text x="300" y="52" font-size="24">REALITY</text>
@@ -114,7 +117,7 @@ const confetti = Array.from({ length: 36 }, (_, i) => ({
     <g v-else-if="props.art === 'exit-dance'">
       <rect width="400" height="300" :fill="`url(#${id}-party)`" />
       <circle v-for="(dot, i) in confetti" :key="i" :cx="dot.x" :cy="dot.y" :r="dot.r" :fill="dot.c" opacity="0.8" />
-      <text x="200" y="182" text-anchor="middle" font-size="120">🕺</text>
+      <g transform="translate(140 60)"><PersonStanding :size="120" :color="paint.reactionDance" :stroke-width="1.4" /></g>
       <circle cx="200" cy="150" r="34" :fill="paint.scrim" opacity="0.45" />
       <path d="M190 132v36l30-18z" :fill="paint.memeInk" />
     </g>

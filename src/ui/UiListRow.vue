@@ -2,6 +2,8 @@
 import { ChevronRight } from '@lucide/vue'
 import { computed } from 'vue'
 
+import IconText from './IconText.vue'
+
 /**
  * iOS table cell. Pass `tint` to get the Settings-style coloured icon square.
  * Renders as a button when `chevron` or `interactive` is set.
@@ -36,10 +38,10 @@ const tag = computed(() => (props.chevron || props.interactive ? 'button' : 'div
       </span>
       <span class="body">
         <span class="text">
-          <span class="title" :class="{ 'is-destructive': destructive }">{{ title }}</span>
-          <span v-if="subtitle" class="subtitle">{{ subtitle }}</span>
+          <span class="title" :class="{ 'is-destructive': destructive }"><IconText :text="title" /></span>
+          <span v-if="subtitle" class="subtitle"><IconText :text="subtitle" /></span>
         </span>
-        <span v-if="detail" class="detail">{{ detail }}</span>
+        <span v-if="detail" class="detail"><IconText :text="detail" /></span>
         <slot name="accessory" />
         <ChevronRight v-if="chevron" class="chevron" aria-hidden="true" />
       </span>

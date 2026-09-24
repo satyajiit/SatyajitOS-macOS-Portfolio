@@ -25,7 +25,7 @@ const git: CommandSpec = {
         return 0
       case 'add':
         ctx.out.print(
-          rest[0] === '.' ? '✅ All changes staged for commit!' : `✅ Added ${rest.join(' ')} to staging area`,
+          rest[0] === '.' ? ':done: All changes staged for commit!' : `:done: Added ${rest.join(' ')} to staging area`,
           'green',
         )
         return 0
@@ -83,7 +83,7 @@ const node: CommandSpec = {
     else if (first === '--version' || first === '-v') ctx.out.print('v18.17.0')
     else {
       ctx.out.print(`Executing: node ${ctx.args.join(' ')}`)
-      ctx.out.print('✅ Script executed successfully!', 'green')
+      ctx.out.print(':done: Script executed successfully!', 'green')
     }
   },
 }
@@ -100,7 +100,7 @@ const python: CommandSpec = {
     else if (first === '--version' || first === '-V') ctx.out.print('Python 3.11.4')
     else {
       ctx.out.print(`Executing: python ${ctx.args.join(' ')}`)
-      ctx.out.print('✅ Python script executed successfully!', 'green')
+      ctx.out.print(':done: Python script executed successfully!', 'green')
     }
   },
 }

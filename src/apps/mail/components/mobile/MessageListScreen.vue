@@ -5,6 +5,7 @@ import { computed } from 'vue'
 import { mailboxCopy } from '@/content/mail'
 import IosNavBar from '@/ui/mobile/IosNavBar.vue'
 import UiSearchField from '@/ui/UiSearchField.vue'
+import IconText from '@/ui/IconText.vue'
 
 import { listDate } from '../../format'
 import { useMailStore, type MailMessage } from '../../store'
@@ -88,9 +89,9 @@ const leading = (m: MailMessage): SwipeAction => ({
                 aria-hidden="true"
               />
             </div>
-            <p class="truncate text-ios-subheadline text-ios-label">{{ message.subject }}</p>
+            <p class="truncate text-ios-subheadline text-ios-label"><IconText :text="message.subject" /></p>
             <p class="preview text-ios-subheadline text-ios-label-secondary">
-              {{ message.preview }}
+              <IconText :text="message.preview" />
             </p>
           </div>
         </SwipeRow>
@@ -101,14 +102,16 @@ const leading = (m: MailMessage): SwipeAction => ({
         class="flex flex-col items-center gap-2 px-10 pt-20 text-center"
       >
         <p class="text-ios-title-3 text-ios-label">
-          {{ mail.query.trim() ? 'No Results' : copy.emptyTitle }}
+          <IconText :text="mail.query.trim() ? 'No Results' : copy.emptyTitle" />
         </p>
         <p class="text-ios-subheadline text-ios-label-secondary">
-          {{
-            mail.query.trim()
-              ? `Nothing in ${copy.title} matches “${mail.query}”.`
-              : copy.emptyMessage
-          }}
+          <IconText
+            :text="
+              mail.query.trim()
+                ? `Nothing in ${copy.title} matches “${mail.query}”.`
+                : copy.emptyMessage
+            "
+          />
         </p>
       </div>
     </div>

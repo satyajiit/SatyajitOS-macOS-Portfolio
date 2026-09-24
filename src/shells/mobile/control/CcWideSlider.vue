@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
+import IconText from '@/ui/IconText.vue'
+
 /** A full-width Control Centre slider for Satyajit's extra modules. Drags 1:1. */
 const value = defineModel<number>({ required: true })
 defineProps<{ label: string; emoji: string; status: string; hint: string }>()
@@ -45,14 +47,14 @@ const onUp = () => (grab = null)
     >
       <span class="fill" :style="fillStyle" aria-hidden="true" />
       <span class="relative flex h-full items-center gap-3 px-5" aria-hidden="true">
-        <span class="text-ios-title-3">{{ emoji }}</span>
+        <span class="text-ios-title-3"><IconText :text="emoji" /></span>
         <span class="min-w-0 flex-1 truncate text-ios-subheadline font-semibold text-ios-label">
-          {{ label }}
+          <IconText :text="label" />
         </span>
-        <span class="text-ios-title-3">{{ status }}</span>
+        <span class="text-ios-title-3"><IconText :text="status" /></span>
       </span>
     </div>
-    <p class="px-3 text-ios-caption-1 text-white/70">{{ hint }}</p>
+    <p class="px-3 text-ios-caption-1 text-white/70"><IconText :text="hint" /></p>
   </div>
 </template>
 

@@ -2,6 +2,8 @@
 import { Flag } from '@lucide/vue'
 import { nextTick, ref, watch } from 'vue'
 
+import IconText from '@/ui/IconText.vue'
+
 import type { MailboxView, MailMessage } from '../store'
 import { listDate } from '../format'
 
@@ -77,13 +79,13 @@ const person = (m: MailMessage) => (props.mailbox === 'sent' ? `To: ${m.to.name}
           listDate(message.receivedAt)
         }}</span>
       </div>
-      <p class="truncate text-body">{{ message.subject }}</p>
-      <p class="meta preview text-body">{{ message.preview }}</p>
+      <p class="truncate text-body"><IconText :text="message.subject" /></p>
+      <p class="meta preview text-body"><IconText :text="message.preview" /></p>
     </div>
 
     <div v-if="!messages.length" class="flex flex-col items-center gap-2 px-8 pt-16 text-center">
-      <p class="text-title-3 text-label-secondary">{{ emptyTitle }}</p>
-      <p class="max-w-[30ch] text-callout text-label-tertiary">{{ emptyMessage }}</p>
+      <p class="text-title-3 text-label-secondary"><IconText :text="emptyTitle" /></p>
+      <p class="max-w-[30ch] text-callout text-label-tertiary"><IconText :text="emptyMessage" /></p>
     </div>
   </div>
 </template>

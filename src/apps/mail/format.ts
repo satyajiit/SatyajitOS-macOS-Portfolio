@@ -1,3 +1,5 @@
+import { stripGlyphs } from '@/ui/glyphs/text'
+
 const DAY = 86_400_000
 
 const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime()
@@ -25,7 +27,7 @@ export function fullDate(timestamp: number, locale?: string): string {
 
 /** Monogram letters for an avatar: first letter of the first two words. */
 export function initials(name: string): string {
-  const letters = name
+  const letters = stripGlyphs(name)
     .split(/\s+/)
     .map((word) => word.match(/\p{L}|\p{N}/u)?.[0] ?? '')
     .filter(Boolean)

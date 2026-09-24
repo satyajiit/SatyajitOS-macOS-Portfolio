@@ -117,13 +117,13 @@ export const folders: FolderEntry[] = [
             max: 15,
             unit: 'cups',
             rows: [
-              { label: 'Mon', value: 8, note: '😴' },
-              { label: 'Tue', value: 12, note: '🚀' },
-              { label: 'Wed', value: 6, note: '😐' },
-              { label: 'Thu', value: 10, note: '💪' },
-              { label: 'Fri', value: 15, note: '🔥' },
-              { label: 'Sat', value: 4, note: '😌' },
-              { label: 'Sun', value: 7, note: '☕' },
+              { label: 'Mon', value: 8, note: ':sleepy:' },
+              { label: 'Tue', value: 12, note: ':rocket:' },
+              { label: 'Wed', value: 6, note: ':meh:' },
+              { label: 'Thu', value: 10, note: ':strong:' },
+              { label: 'Fri', value: 15, note: ':fire:' },
+              { label: 'Sat', value: 4, note: ':smile:' },
+              { label: 'Sun', value: 7, note: ':coffee:' },
             ],
           },
           {
@@ -146,27 +146,27 @@ export const folders: FolderEntry[] = [
           },
           {
             type: 'text',
-            body: `☕ COFFEE ADDICTION ANALYSIS ☕
+            body: `:coffee: COFFEE ADDICTION ANALYSIS :coffee:
 
-📊 Daily Statistics:
+:chart: Daily Statistics:
 • Average cups per day: 6.2
 • Peak consumption: 11 AM & 3 PM
 • Productivity correlation: 94%
 • Code quality improvement: +67%
 
-⏰ Brewing Preferences:
+:alarm: Brewing Preferences:
 • Optimal brewing time: 4 minutes
 • Favorite blend: Ethiopian single origin
 • Backup blend: Whatever's available
 • Emergency protocol: Instant coffee (dark times)
 
-🧠 Cognitive Effects:
+:brain: Cognitive Effects:
 • Pre-coffee IQ: 85
 • Post-coffee IQ: 142
 • Debugging ability: +200%
 • Meeting tolerance: +50%
 
-⚠️ Warning: Withdrawal symptoms include existential crisis and inability to center divs.`,
+:warning: Warning: Withdrawal symptoms include existential crisis and inability to center divs.`,
           },
         ],
       },
@@ -247,8 +247,8 @@ Coffee Dependency: Maximum`,
             items: [
               { value: '38,000+', label: 'Stores Created' },
               { value: '49,000+', label: 'Orders Processed' },
-              { value: '4.8/5 ⭐', label: 'App Rating' },
-              { value: '0% 🎉', label: 'Commission' },
+              { value: '4.8/5 :star:', label: 'App Rating' },
+              { value: '0% :party:', label: 'Commission' },
             ],
           },
           {
@@ -299,7 +299,7 @@ Team Energy Level: Red Bull Hackathon Squad
 Innovation Rate: Maximum Overdrive
 Coffee Consumption: Industrial Scale
 
-Next Sprint: Revolutionizing fintech, one feature at a time! 💳`,
+Next Sprint: Revolutionizing fintech, one feature at a time! :card:`,
           },
         ],
       },
@@ -326,7 +326,7 @@ Next Sprint: Revolutionizing fintech, one feature at a time! 💳`,
 Design Philosophy:
 "Why just tell time when you can know if DRS is available?"
 
-Current Status: Awaiting Series A funding for smartwatch startup 🏎️`,
+Current Status: Awaiting Series A funding for smartwatch startup :race-car:`,
           },
         ],
       },
@@ -443,7 +443,7 @@ Current Status: Awaiting Series A funding for smartwatch startup 🏎️`,
           },
           {
             type: 'text',
-            body: `🦄 NEXT UNICORN BUSINESS PLAN v47 🦄
+            body: `:unicorn: NEXT UNICORN BUSINESS PLAN v47 :unicorn:
 
 Executive Summary:
 We're going to disrupt [insert industry] with [buzzword] technology using [another buzzword] methodology.
@@ -494,11 +494,11 @@ Outcome: Another meeting scheduled`,
           },
           {
             type: 'text',
-            body: `📝 MEETING NOTES 📝
+            body: `:notes: MEETING NOTES :notes:
 
 Meeting: "Quick sync" (lasted 2 hours)
 Attendees: Too many
-Could have been an email: ✓
+Could have been an email: :check:
 
 Agenda:
 1. Discuss the discussion about discussing things
@@ -549,7 +549,7 @@ Action Items:
         preview: [
           {
             type: 'text',
-            body: `🐛 BUG REPORT TEMPLATE 🐛
+            body: `:bug: BUG REPORT TEMPLATE :bug:
 
 Steps to reproduce:
 1. Write perfect code
@@ -714,21 +714,21 @@ Year 4: Acquired by Google for $10B (extremely optimistic)`,
           },
           {
             type: 'text',
-            body: `📱 FIRST PROTOTYPE NOTES 📱
+            body: `:phone: FIRST PROTOTYPE NOTES :phone:
 
-Status: IT ACTUALLY WORKS! 🎉
+Status: IT ACTUALLY WORKS! :party:
 
 Technical Debt Level: Astronomical
 Code Quality: Held together with duct tape and prayers
 Documentation: "The code is self-documenting" (it's not)
 
 Features:
-✅ Basic functionality
-✅ Crashes gracefully
-✅ Confuses users effectively
-❌ Scalability
-❌ Security
-❌ Common sense
+:done: Basic functionality
+:done: Crashes gracefully
+:done: Confuses users effectively
+:cross: Scalability
+:cross: Security
+:cross: Common sense
 
 Known Issues:
 - Works only on developer's machine
@@ -979,25 +979,25 @@ export const smartFolders: SmartFolder[] = [
   {
     id: 'screenshots',
     name: 'Screenshots',
-    description: 'Screenshots of screenshots... the developer way 📸',
+    description: 'Screenshots of screenshots... the developer way :camera:',
     match: { extensions: ['png', 'jpg', 'jpeg', 'gif'] },
   },
   {
     id: 'code-graveyard',
     name: 'Code Graveyard',
-    description: 'Where good code goes to rest... and bad code goes to hide 💻',
+    description: 'Where good code goes to rest... and bad code goes to hide :laptop:',
     match: { extensions: ['py', 'js', 'ts', 'sol', 'ino', 'qasm', 'apk'] },
   },
   {
     id: 'yc-journey',
     name: 'YC Journey',
-    description: 'YC 2022 Finalist memories - Top 1% of startups worldwide! 🏆',
+    description: 'YC 2022 Finalist memories - Top 1% of startups worldwide! :trophy:',
     match: { names: ['yc_'], tags: ['yc'] },
   },
   {
     id: 'fintech-innovations',
     name: 'Fintech Innovations',
-    description: 'Leading product strategy with passionate hackathon energy! 💳',
+    description: 'Leading product strategy with passionate hackathon energy! :card:',
     match: { names: ['mosambee', 'fintech', 'product_strategy'], tags: ['fintech'] },
   },
 ]
@@ -1039,24 +1039,24 @@ export const sidebar = {
 /** Copy used around the file browser. */
 export const finderCopy = {
   welcome: [
-    "Welcome to Satyajit's Digital Life! Where organized chaos meets entrepreneurial genius 📁",
-    'Finder loaded! Now featuring 8-digit exit memories and caffeine-induced insights ☕',
-    'Welcome to the digital realm of a YC Finalist! Proceed with caffeinated caution 🚀',
-    'Finder ready! Home to 50,000+ business dreams and infinite coffee stats ⚡',
-    'Digital workspace loaded! May contain traces of startup magic and biryani wisdom 🌟',
+    "Welcome to Satyajit's Digital Life! Where organized chaos meets entrepreneurial genius :folder:",
+    'Finder loaded! Now featuring 8-digit exit memories and caffeine-induced insights :coffee:',
+    'Welcome to the digital realm of a YC Finalist! Proceed with caffeinated caution :rocket:',
+    'Finder ready! Home to 50,000+ business dreams and infinite coffee stats :zap:',
+    'Digital workspace loaded! May contain traces of startup magic and biryani wisdom :shine:',
   ],
   /** Shown once per session the first time a folder is opened. */
   folderOpened: {
-    'coffee-addiction': 'Warning: Extreme caffeine levels detected in this folder ☕',
-    'failed-experiments': 'Entering the graveyard of good intentions... 💀',
-    'future-unicorns': 'These projects will definitely make me rich... someday 🦄',
-    memes: 'Productivity -50%, Happiness +100% 😂',
-    'zyada-shop-folder': 'Ah, the 8-digit exit memories! 50,000+ businesses helped 🚀',
-    'mosambee-magic': 'Current fintech innovations in progress... Red Bull not included ⚡',
-    'yc-journey': 'YC 2022 Finalist memories - Top 1% of startups worldwide! 🏆',
-    'code-graveyard': 'Where good code goes to rest... and bad code goes to hide 💻',
-    screenshots: 'Screenshots of screenshots... the developer way 📸',
-    'fintech-innovations': 'Leading product strategy with passionate hackathon energy! 💳',
+    'coffee-addiction': 'Warning: Extreme caffeine levels detected in this folder :coffee:',
+    'failed-experiments': 'Entering the graveyard of good intentions... :skull:',
+    'future-unicorns': 'These projects will definitely make me rich... someday :unicorn:',
+    memes: 'Productivity -50%, Happiness +100% :laugh:',
+    'zyada-shop-folder': 'Ah, the 8-digit exit memories! 50,000+ businesses helped :rocket:',
+    'mosambee-magic': 'Current fintech innovations in progress... Red Bull not included :zap:',
+    'yc-journey': 'YC 2022 Finalist memories - Top 1% of startups worldwide! :trophy:',
+    'code-graveyard': 'Where good code goes to rest... and bad code goes to hide :laptop:',
+    screenshots: 'Screenshots of screenshots... the developer way :camera:',
+    'fintech-innovations': 'Leading product strategy with passionate hackathon energy! :card:',
   } as Record<string, string>,
   search: [
     'Searching for "{q}"... Found mostly regrets and old screenshots',
@@ -1161,13 +1161,13 @@ export const finderCopy = {
     'the user (just kidding, we love users... mostly)',
   ],
   actions: {
-    procrastinate: 'Procrastination mode activated! ⏰ Nothing will get done today.',
-    blameIntern: 'The intern has been successfully blamed for this issue. 🤷‍♂️',
-    coffeeBreak: 'Coffee break initiated! ☕ Productivity will resume in 30 minutes.',
-    panic: 'PANIC MODE ACTIVATED! 😱 Everything is on fire!',
-    newFolder: 'Created "Untitled Folder" - Another place to lose files! 📁',
-    refreshed: 'Files refreshed! Still the same chaos though... 🔄',
-    shared: 'Shared the epic tale of "{name}" with the world! 🌍',
+    procrastinate: 'Procrastination mode activated! :alarm: Nothing will get done today.',
+    blameIntern: 'The intern has been successfully blamed for this issue. :shrug:',
+    coffeeBreak: 'Coffee break initiated! :coffee: Productivity will resume in 30 minutes.',
+    panic: 'PANIC MODE ACTIVATED! :scream: Everything is on fire!',
+    newFolder: 'Created "Untitled Folder" - Another place to lose files! :folder:',
+    refreshed: 'Files refreshed! Still the same chaos though... :refresh:',
+    shared: 'Shared the epic tale of "{name}" with the world! :earth:',
     hidden: 'Hidden files revealed: none. Everything embarrassing is already on display.',
   },
   /** Humorous "Kind" descriptions, by extension. */

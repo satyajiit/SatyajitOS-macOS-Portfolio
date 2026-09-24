@@ -9,6 +9,7 @@ import { profile } from '@/content/profile'
 import { spring } from '@/design/motion'
 import UiButton from '@/ui/UiButton.vue'
 import UiTextField from '@/ui/UiTextField.vue'
+import IconText from '@/ui/IconText.vue'
 
 import { isEmail, type Draft } from '../store'
 
@@ -129,7 +130,7 @@ const enter = computed(() =>
             placeholder="Say hello…"
           />
         </div>
-        <p class="text-subheadline text-label-secondary">{{ composeCopy.demoNote }}</p>
+        <p class="text-subheadline text-label-secondary"><IconText :text="composeCopy.demoNote" /></p>
         <div class="mt-1 flex items-center gap-2">
           <a
             :href="mailto"

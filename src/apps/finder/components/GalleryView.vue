@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, watch } from 'vue'
 
-import { UiButton } from '@/ui'
+import { IconText, UiButton } from '@/ui'
 
 import { kindLabel, type Item } from '../fs'
 
@@ -54,7 +54,7 @@ watch(
             <dd class="text-right text-label">{{ current.tags.join(', ') }}</dd>
           </div>
         </dl>
-        <p v-if="current.description" class="text-callout text-label-secondary">{{ current.description }}</p>
+        <p v-if="current.description" class="text-callout text-label-secondary"><IconText :text="current.description" /></p>
         <div class="mt-auto flex flex-col gap-2">
           <UiButton size="small" @click="emit('quicklook', current)">Quick Look</UiButton>
           <UiButton size="small" @click="emit('open', current)">Open</UiButton>

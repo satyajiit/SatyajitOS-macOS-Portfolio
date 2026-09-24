@@ -2,7 +2,7 @@
 import { ChevronRight, Ellipsis, Info } from '@lucide/vue'
 import { computed, ref } from 'vue'
 
-import { IosNavBar, UiSearchField } from '@/ui'
+import { IconText, IosNavBar, UiSearchField } from '@/ui'
 
 import ItemIcon from '../components/ItemIcon.vue'
 import StateView from '../components/StateView.vue'
@@ -79,7 +79,7 @@ function tap(item: Item) {
       <UiSearchField v-model="query" platform="ios" :placeholder="`Search in ${location.name}`" />
     </div>
     <p v-if="!state" class="px-4 pb-2 text-ios-footnote text-ios-label-secondary">
-      {{ count }}<template v-if="location.description"> · {{ location.description }}</template>
+      {{ count }}<template v-if="location.description"> · <IconText :text="location.description" /></template>
     </p>
 
     <StateView
@@ -137,7 +137,7 @@ function tap(item: Item) {
                 <TagDots :colors="tagColorsOf(item, addedTags[item.id])" />
               </span>
               <span class="truncate text-ios-footnote text-ios-label-secondary">
-                {{ [item.modified, item.size].filter(Boolean).join(' – ') || item.description || 'Folder' }}
+                <IconText :text="[item.modified, item.size].filter(Boolean).join(' – ') || item.description || 'Folder'" />
               </span>
             </span>
           </button>

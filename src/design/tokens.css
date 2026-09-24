@@ -54,6 +54,9 @@
   --traffic-zoom-edge: #12ac28;
   --traffic-zoom-glyph: #006500;
 
+  /* Verified-sender logos sit on a white disc, like Mail's brand avatars */
+  --brand-plate: #ffffff;
+
   /* Control knobs (switches, sliders) are white in both appearances */
   --knob: #ffffff;
   --elev-knob: 0 0 0 0.5px rgb(0 0 0 / 0.06), 0 2px 6px rgb(0 0 0 / 0.22);

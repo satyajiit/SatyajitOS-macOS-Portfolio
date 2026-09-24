@@ -23,6 +23,7 @@ import { ACCENTS, useAppearanceStore, type AccentColor } from '@/stores/appearan
 import { useSystemStatusStore, type FocusMode } from '@/stores/systemStatus'
 import UiSlider from '@/ui/UiSlider.vue'
 import UiSwitch from '@/ui/UiSwitch.vue'
+import IconText from '@/ui/IconText.vue'
 
 import { closeMenus } from '../shellUi'
 import CcCircle from './CcCircle.vue'
@@ -100,7 +101,7 @@ const accentLabel: Record<AccentColor, string> = {
           <CcCircle :on="wifiOn" label="Wi-Fi" @toggle="status.toggleWifi()"><Wifi /></CcCircle>
           <div class="min-w-0">
             <p class="text-headline">Wi-Fi</p>
-            <p class="truncate text-subheadline text-label-secondary">{{ wifiDetail }}</p>
+            <p class="truncate text-subheadline text-label-secondary"><IconText :text="wifiDetail" /></p>
           </div>
         </div>
         <div class="flex items-center gap-2">
@@ -109,7 +110,7 @@ const accentLabel: Record<AccentColor, string> = {
           </CcCircle>
           <div class="min-w-0">
             <p class="text-headline">Bluetooth</p>
-            <p class="truncate text-subheadline text-label-secondary">{{ bluetoothDetail }}</p>
+            <p class="truncate text-subheadline text-label-secondary"><IconText :text="bluetoothDetail" /></p>
           </div>
         </div>
         <div class="flex items-center gap-2">
@@ -189,7 +190,7 @@ const accentLabel: Record<AccentColor, string> = {
         <span class="focus-icon" :class="{ 'is-on': status.focusMode === mode.id }">
           <component :is="mode.icon" />
         </span>
-        <span class="flex-1 text-left text-body">{{ mode.label }}</span>
+        <span class="flex-1 text-left text-body"><IconText :text="mode.label" /></span>
         <Check v-if="status.focusMode === mode.id" class="size-3.5 text-label-secondary" />
       </button>
     </div>

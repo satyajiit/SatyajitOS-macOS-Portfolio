@@ -42,7 +42,7 @@ export function useFinderActions() {
     blameSomeone() {
       post(
         'Blame Successfully Assigned',
-        `This error is definitely the fault of ${randomOf(finderCopy.blameTargets)}! 🎯`,
+        `This error is definitely the fault of ${randomOf(finderCopy.blameTargets)}! :target:`,
         'success',
       )
     },

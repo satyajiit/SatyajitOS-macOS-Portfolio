@@ -17,7 +17,7 @@ import {
 } from '@/content/about'
 import { profile } from '@/content/profile'
 import { useWindowsStore } from '@/stores/windows'
-import { UiButton, UiSegmented } from '@/ui'
+import { BrandIcon, Glyph, IconText, UiButton, UiSegmented } from '@/ui'
 import { WindowTitlebar } from '@/ui/window'
 
 import { aboutIcons, tintVar } from './icons'
@@ -53,7 +53,7 @@ const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferre
 
     <div class="chrome flex shrink-0 justify-center pb-3">
       <!-- Fixed width: segments share it equally, like AppKit's tab-style control -->
-      <UiSegmented v-model="tab" :options="tabs" label="About sections" class="w-[400px]" />
+      <UiSegmented v-model="tab" :options="tabs" label="About sections" />
     </div>
 
     <div class="min-h-0 flex-1 overflow-y-auto">
@@ -117,7 +117,7 @@ const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferre
               class="flex flex-col-reverse justify-end rounded-xl bg-fill-quaternary px-2 py-3"
             >
               <dt class="mt-0.5 text-footnote text-label-secondary">{{ metric.label }}</dt>
-              <dd class="tabular text-title-1 font-semibold text-label">{{ metric.value }}</dd>
+              <dd class="tabular text-title-1 font-semibold text-label"><IconText :text="metric.value" /></dd>
             </div>
           </dl>
 
@@ -134,8 +134,8 @@ const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferre
                 :style="{ color: tintVar(item.tint) }"
                 aria-hidden="true"
               />
-              <span class="text-headline text-label">{{ item.title }}</span>
-              <span class="text-callout text-label-secondary">{{ item.detail }}</span>
+              <span class="text-headline text-label"><IconText :text="item.title" /></span>
+              <span class="text-callout text-label-secondary"><IconText :text="item.detail" /></span>
             </li>
           </ul>
 
@@ -154,8 +154,8 @@ const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferre
                 <component :is="aboutIcons[item.icon]" class="size-4" />
               </span>
               <span class="min-w-0 flex-1">
-                <span class="block text-body font-medium text-label">{{ item.title }}</span>
-                <span class="block text-callout text-label-secondary">{{ item.detail }}</span>
+                <span class="block text-body font-medium text-label"><IconText :text="item.title" /></span>
+                <span class="block text-callout text-label-secondary"><IconText :text="item.detail" /></span>
               </span>
             </li>
           </ul>
@@ -172,10 +172,12 @@ const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferre
             <ul role="list" class="flex flex-wrap gap-1.5">
               <li
                 v-for="item in group.items"
-                :key="item"
-                class="rounded-full bg-fill-secondary px-2.5 py-0.5 text-callout text-label"
+                :key="item.label"
+                class="flex items-center gap-1.5 rounded-full bg-fill-secondary py-0.5 pl-1.5 pr-2.5 text-callout text-label"
               >
-                {{ item }}
+                <BrandIcon v-if="item.brand" :name="item.brand" :size="14" decorative />
+                <Glyph v-else name="database" :tinted="false" class="text-label-secondary" />
+                {{ item.label }}
               </li>
             </ul>
           </div>
@@ -185,7 +187,7 @@ const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferre
         <section v-else key="facts" class="px-8 pb-5 pt-1">
           <ul role="list" class="mb-4 flex flex-col gap-1 text-center">
             <li v-for="motto in mottos" :key="motto" class="text-title-3 text-label">
-              “{{ motto }}”
+              “<IconText :text="motto" />”
             </li>
           </ul>
           <ul role="list">
@@ -195,9 +197,9 @@ const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferre
               class="flex gap-3 border-b border-separator py-2.5 last:border-b-0"
             >
               <span class="w-6 shrink-0 text-center text-title-3" aria-hidden="true">
-                {{ fact.emoji }}
+                <Glyph :name="fact.icon" />
               </span>
-              <span class="text-body text-label">{{ fact.text }}</span>
+              <span class="text-body text-label"><IconText :text="fact.text" /></span>
             </li>
           </ul>
         </section>

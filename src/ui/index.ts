@@ -1,3 +1,8 @@
+export { BrandIcon, brands, type BrandName } from './brand'
+export { default as Glyph } from './glyphs/Glyph.vue'
+export { default as IconText } from './IconText.vue'
+export { glyphs, isGlyphName, type GlyphName } from './glyphs/registry'
+export { hasGlyphs, stripGlyphs, tokenize } from './glyphs/text'
 export { default as UiAppIcon } from './UiAppIcon.vue'
 export { default as UiBadge } from './UiBadge.vue'
 export { default as UiButton } from './UiButton.vue'

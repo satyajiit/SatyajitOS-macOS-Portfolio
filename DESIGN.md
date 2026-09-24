@@ -117,11 +117,29 @@ App icons use Apple's continuous-corner shape, drawn as a superellipse (`src/ui/
 - `prefers-reduced-motion` collapses spatial motion to short cross-fades. Dock magnification turns off.
 - Drags track the pointer 1:1 from where you grabbed it, and swipes carry their release velocity into the spring.
 
+## Symbols, not emoji
+
+The UI uses no emoji. Anywhere copy wants a symbol, `src/content` writes a short code like `:rocket:` or `:coffee:`, and `<IconText>` renders it as the matching [Lucide](https://lucide.dev) icon at 1em, on the text baseline, the way an SF Symbol sits in a line of text. Each glyph has an Apple system-colour tint, like a multicolour symbol. Terminal output renders them untinted so they take the line's colour.
+
+```ts
+subject: ':briefcase: Interested in Your Work!'   // content
+<IconText :text="message.subject" />                // component
+stripGlyphs(message.subject)                        // titles, inputs, aria-labels
+```
+
+- The registry lives in `src/ui/glyphs/registry.ts`, with name, icon and tint. Unknown codes stay as plain text, so `12:30:45` is safe.
+- Content fields that are just an icon (Coffee topics, About fun facts) use a typed `icon: GlyphName` and render with `<Glyph :name>`.
+- Places that can't hold markup (document title, input values, placeholders, `aria-label`) must go through `stripGlyphs()`.
+
+## Brand logos
+
+Third-party logos come from [svgl](https://svgl.app), through [`@selemondev/svgl-vue`](https://github.com/selemondev/svgl-vue), and render with `<BrandIcon name="github" :size="16" />`. They keep their real colours. Marks that are black, or have near-black parts (GitHub, X, Next.js, AWS, MongoDB), are marked with `ink` in `src/ui/brand/registry.ts`, and those parts follow the text colour, so the logo stays readable in dark mode. Content picks a brand by name: `socials` in `profile.ts`, the tech stack in `about.ts`, and verified mail senders in `mail.ts`.
+
 ## Components
 
 Shared primitives live in [`src/ui`](src/ui). Each one covers default, hover, focus-visible, active, disabled and, where relevant, loading, success and error:
 
-`UiButton` · `UiIconButton` · `UiSwitch` · `UiSlider` · `UiSegmented` · `UiSearchField` · `UiTextField` · `UiMenu` / `UiMenuItem` / `UiMenuSeparator` · `UiBadge` · `UiSpinner` · `UiProgress` · `UiSidebarSection` / `UiSidebarItem` · `UiListGroup` / `UiListRow` · `UiAppIcon` · `IosNavBar`
+`IconText` / `Glyph` · `BrandIcon` · `UiButton` · `UiIconButton` · `UiSwitch` · `UiSlider` · `UiSegmented` · `UiSearchField` · `UiTextField` · `UiMenu` / `UiMenuItem` / `UiMenuSeparator` · `UiBadge` · `UiSpinner` · `UiProgress` · `UiSidebarSection` / `UiSidebarItem` · `UiListGroup` / `UiListRow` · `UiAppIcon` · `IosNavBar`
 
 Window chrome for apps lives in [`src/ui/window`](src/ui/window): `WindowTitlebar`, `WindowToolbar`, `WindowSidebar` and `TrafficLights`.
 

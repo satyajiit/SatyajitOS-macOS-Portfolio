@@ -5,6 +5,7 @@ import { computed, nextTick, ref, watch } from 'vue'
 import { composeCopy } from '@/content/mail'
 import { profile } from '@/content/profile'
 import UiSpinner from '@/ui/UiSpinner.vue'
+import IconText from '@/ui/IconText.vue'
 
 import { isEmail, type Draft } from '../../store'
 
@@ -142,7 +143,7 @@ async function send() {
       <footer
         class="footer shrink-0 border-t border-ios-separator px-4 pt-2 text-ios-footnote text-ios-label-secondary"
       >
-        <p>{{ composeCopy.demoNote }}</p>
+        <p><IconText :text="composeCopy.demoNote" /></p>
         <a :href="mailto" class="focus-ring mt-1 inline-block text-accent">Open in Mail</a>
       </footer>
     </form>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Briefcase, Check, Code, RotateCcw } from '@lucide/vue'
+import { Check, RotateCcw } from '@lucide/vue'
 
 import {
   brewing,
@@ -12,8 +12,8 @@ import {
   topics,
   topicsTitle,
 } from '@/content/coffee'
-import { profile } from '@/content/profile'
-import { UiAppIcon, UiButton, UiIconButton, UiProgress, UiSegmented, UiTextField } from '@/ui'
+import { socials } from '@/content/profile'
+import { BrandIcon, Glyph, IconText, UiAppIcon, UiButton, UiIconButton, UiProgress, UiSegmented, UiTextField } from '@/ui'
 import { WindowToolbar } from '@/ui/window'
 
 import { useCoffeeBooking } from './useCoffeeBooking'
@@ -26,7 +26,7 @@ import { useCoffeeBooking } from './useCoffeeBooking'
 const booking = useCoffeeBooking()
 const { details, errors } = booking
 
-const meetingOptions = meetingTypes.map((m) => ({ value: m.id, label: `${m.emoji} ${m.label}` }))
+const meetingOptions = meetingTypes.map((m) => ({ value: m.id, label: m.label, icon: m.icon }))
 
 const openLink = (url: string) => window.open(url, '_blank', 'noopener,noreferrer')
 const emailInstead = () => (window.location.href = booking.mailtoHref.value)
@@ -43,11 +43,13 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
         >
           <RotateCcw />
         </UiIconButton>
-        <UiIconButton label="LinkedIn" @click="openLink(profile.links.linkedin)">
-          <Briefcase />
-        </UiIconButton>
-        <UiIconButton label="GitHub" @click="openLink(profile.links.github)">
-          <Code />
+        <UiIconButton
+          v-for="link in socials"
+          :key="link.label"
+          :label="link.label"
+          @click="openLink(link.url)"
+        >
+          <BrandIcon :name="link.brand" :size="16" decorative />
         </UiIconButton>
       </template>
     </WindowToolbar>
@@ -67,8 +69,8 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
             <UiAppIcon name="coffee" :size="64" />
           </button>
           <div class="min-w-0 flex-1">
-            <h2 class="text-title-2 font-semibold text-label">{{ intro.title }}</h2>
-            <p class="mt-1 text-body text-label-secondary">{{ intro.body }}</p>
+            <h2 class="text-title-2 font-semibold text-label"><IconText :text="intro.title" /></h2>
+            <p class="mt-1 text-body text-label-secondary"><IconText :text="intro.body" /></p>
             <div class="mt-3 flex items-center gap-3">
               <UiProgress class="flex-1" :value="booking.brewProgress.value" label="Brewing" />
               <span class="tabular w-9 text-right text-callout text-label-secondary">
@@ -76,7 +78,7 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
               </span>
             </div>
             <p class="mt-1.5 text-footnote text-label-tertiary">
-              {{ booking.isBrewing.value ? booking.brewReading.value : brewing.machine }}
+              <IconText :text="booking.isBrewing.value ? booking.brewReading.value : brewing.machine" />
             </p>
           </div>
         </section>
@@ -85,14 +87,14 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
           class="grid grid-cols-3 divide-x divide-separator rounded-xl bg-fill-quaternary py-3 text-center"
         >
           <div v-for="stat in quickStats" :key="stat.label" class="flex flex-col-reverse">
-            <dt class="text-footnote text-label-secondary">{{ stat.label }}</dt>
+            <dt class="text-footnote text-label-secondary"><IconText :text="stat.label" /></dt>
             <dd class="tabular text-title-2 font-semibold text-label">{{ stat.value }}</dd>
           </div>
         </dl>
 
         <!-- Topics -->
         <section>
-          <h3 id="topics-title" class="mb-2 text-headline text-label">{{ topicsTitle }}</h3>
+          <h3 id="topics-title" class="mb-2 text-headline text-label"><IconText :text="topicsTitle" /></h3>
           <div
             role="radiogroup"
             aria-labelledby="topics-title"
@@ -111,13 +113,11 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
                 class="grid size-8 shrink-0 place-items-center rounded-lg bg-fill-secondary text-title-3"
                 aria-hidden="true"
               >
-                {{ item.emoji }}
+                <Glyph :name="item.icon" />
               </span>
               <span class="min-w-0 flex-1">
-                <span class="block text-headline text-label">{{ item.title }}</span>
-                <span class="mt-0.5 block text-callout text-label-secondary">{{
-                  item.description
-                }}</span>
+                <span class="block text-headline text-label"><IconText :text="item.title" /></span>
+                <span class="mt-0.5 block text-callout text-label-secondary"><IconText :text="item.description" /></span>
                 <span class="mt-2 flex flex-wrap gap-1">
                   <span
                     v-for="tag in item.tags"
@@ -140,8 +140,8 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
 
         <!-- Coffee personality test -->
         <section>
-          <h3 id="coffee-title" class="text-headline text-label">{{ personalityTest.title }}</h3>
-          <p class="mb-2 text-callout text-label-secondary">{{ personalityTest.subtitle }}</p>
+          <h3 id="coffee-title" class="text-headline text-label"><IconText :text="personalityTest.title" /></h3>
+          <p class="mb-2 text-callout text-label-secondary"><IconText :text="personalityTest.subtitle" /></p>
           <div role="radiogroup" aria-labelledby="coffee-title" class="grid grid-cols-3 gap-2">
             <button
               v-for="item in coffeeTypes"
@@ -152,9 +152,9 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
               class="cup focus-ring flex flex-col items-center gap-0.5 rounded-xl bg-fill-quaternary px-2 py-3 text-center"
               @click="booking.pickCoffee(item)"
             >
-              <span class="text-title-1" aria-hidden="true">{{ item.emoji }}</span>
+              <span class="text-title-1" aria-hidden="true"><Glyph :name="item.icon" /></span>
               <span class="text-headline text-label">{{ item.name }}</span>
-              <span class="text-footnote text-label-secondary">{{ item.personality }}</span>
+              <span class="text-footnote text-label-secondary"><IconText :text="item.personality" /></span>
             </button>
           </div>
           <p
@@ -166,14 +166,14 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
             "
             aria-live="polite"
           >
-            {{ booking.coffee.value?.analysis ?? personalityTest.placeholder }}
+            <IconText :text="booking.coffee.value?.analysis ?? personalityTest.placeholder" />
           </p>
         </section>
 
         <!-- The form -->
         <section>
-          <h3 class="text-headline text-label">{{ form.title }}</h3>
-          <p class="mb-3 text-callout text-label-secondary">{{ form.subtitle }}</p>
+          <h3 class="text-headline text-label"><IconText :text="form.title" /></h3>
+          <p class="mb-3 text-callout text-label-secondary"><IconText :text="form.subtitle" /></p>
           <div class="grid grid-cols-2 gap-x-4 gap-y-3">
             <UiTextField
               v-model="details.name"
@@ -198,9 +198,7 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
               :hint="form.when.hint"
             />
             <div class="col-span-2 flex flex-col gap-1">
-              <span class="text-callout font-medium text-label-secondary">{{
-                form.meetingType
-              }}</span>
+              <span class="text-callout font-medium text-label-secondary"><IconText :text="form.meetingType" /></span>
               <UiSegmented
                 v-model="details.meetingType"
                 :options="meetingOptions"
@@ -224,10 +222,10 @@ const emailInstead = () => (window.location.href = booking.mailtoHref.value)
     <footer
       class="chrome flex shrink-0 items-center gap-3 border-t border-separator bg-window px-5 py-3"
     >
-      <p class="min-w-0 flex-1 text-footnote text-label-tertiary">{{ form.reassurance }}</p>
-      <UiButton @click="emailInstead">{{ form.emailInstead }}</UiButton>
+      <p class="min-w-0 flex-1 text-footnote text-label-tertiary"><IconText :text="form.reassurance" /></p>
+      <UiButton @click="emailInstead"><IconText :text="form.emailInstead" /></UiButton>
       <UiButton variant="primary" :state="booking.state.value" @click="booking.book">
-        {{ form.submit }}
+        <IconText :text="form.submit" />
       </UiButton>
     </footer>
   </div>

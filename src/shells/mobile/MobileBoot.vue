@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import { boot } from '@/content/mobile'
 import { useMobileStore } from '@/stores/mobile'
 import UiProgress from '@/ui/UiProgress.vue'
+import IconText from '@/ui/IconText.vue'
 
 /** Black screen, white bolt, thin progress bar: the iPhone start-up, rebranded. */
 const store = useMobileStore()
@@ -26,7 +27,7 @@ const message = computed(() => {
     </svg>
     <div class="absolute inset-x-0 bottom-[22%] flex flex-col items-center gap-3">
       <UiProgress :value="store.bootProgress" label="Starting SatyajitOS" tone="light" class="w-[140px]" />
-      <p class="text-ios-caption-1 opacity-50">{{ message }}</p>
+      <p class="text-ios-caption-1 opacity-50"><IconText :text="message" /></p>
     </div>
   </div>
 </template>

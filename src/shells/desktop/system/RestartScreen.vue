@@ -2,6 +2,7 @@
 import { restart as copy } from '@/content/system'
 import { useSystemStore } from '@/stores/system'
 import UiProgress from '@/ui/UiProgress.vue'
+import IconText from '@/ui/IconText.vue'
 
 import BrandGlyph from '../BrandGlyph.vue'
 
@@ -14,9 +15,9 @@ const system = useSystemStore()
     <div class="flex w-64 flex-col items-center gap-10 text-center">
       <BrandGlyph class="mark size-20" />
       <UiProgress class="w-40" tone="light" :value="system.systemProgress" :label="system.systemMessage" />
-      <p class="message text-body" aria-live="polite">{{ system.systemMessage }}</p>
+      <p class="message text-body" aria-live="polite"><IconText :text="system.systemMessage" /></p>
       <p v-if="system.systemProgress > 80" class="message text-callout">
-        {{ copy.almostDone }} {{ copy.refreshWarning }}
+        <IconText :text="copy.almostDone" /> <IconText :text="copy.refreshWarning" />
       </p>
     </div>
   </div>

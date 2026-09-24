@@ -11,6 +11,7 @@ import { lock } from '@/content/system'
 import { useAppearanceStore } from '@/stores/appearance'
 import { useSystemStore } from '@/stores/system'
 import UiSpinner from '@/ui/UiSpinner.vue'
+import IconText from '@/ui/IconText.vue'
 
 /**
  * The macOS lock screen: blurred desktop, big clock up top, the user and a
@@ -54,7 +55,7 @@ onMounted(() => input.value?.focus())
     <div class="flex flex-col items-center">
       <p class="text-title-2 font-semibold opacity-90">{{ clock.longDate.value }}</p>
       <p class="clock tabular text-clock font-display">{{ clock.bigTime.value }}</p>
-      <p class="mt-2 text-body opacity-80">{{ quip }}</p>
+      <p class="mt-2 text-body opacity-80"><IconText :text="quip" /></p>
     </div>
 
     <form class="flex flex-col items-center gap-3" @submit.prevent="submit">
@@ -87,10 +88,10 @@ onMounted(() => input.value?.focus())
       </div>
 
       <p v-if="error" id="lock-error" role="alert" class="text-callout font-medium">
-        {{ error }}
+        <IconText :text="error" />
         <span v-if="attempts" class="tabular opacity-75">({{ attempts }}/{{ system.maxLockScreenAttempts }})</span>
       </p>
-      <p id="lock-hint" class="text-callout opacity-70">{{ lock.hint }}</p>
+      <p id="lock-hint" class="text-callout opacity-70"><IconText :text="lock.hint" /></p>
     </form>
   </div>
 </template>

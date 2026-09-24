@@ -87,4 +87,9 @@ export const photoArt = {
   partyBottom: '#d76d77',
   confetti: ['#ffd60a', '#32d74b', '#0a84ff', '#ff375f', '#bf5af2', '#ff9f0a'],
   scrim: '#000000',
+  /** Reaction symbols drawn over the memes (the classic yellow / rocket / flame). */
+  reactionFace: '#ffd60a',
+  reactionRocket: '#e5e5ea',
+  reactionFlame: '#ff9f0a',
+  reactionDance: '#ffffff',
 } as const

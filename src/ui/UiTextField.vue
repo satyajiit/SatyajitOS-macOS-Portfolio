@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useId } from 'vue'
 
+import { stripGlyphs } from './glyphs/text'
+import IconText from './IconText.vue'
+
 /**
  * Labelled text field. Error text replaces the hint and turns the ring red;
  * `multiline` renders a textarea.
@@ -26,14 +29,14 @@ const id = useId()
 
 <template>
   <div class="field" :class="[`is-${platform}`, { 'has-error': error }]">
-    <label :for="id" class="label" :class="{ 'sr-only': hideLabel }">{{ label }}</label>
+    <label :for="id" class="label" :class="{ 'sr-only': hideLabel }"><IconText :text="label" /></label>
     <textarea
       v-if="multiline"
       :id="id"
       v-model="value"
       class="control"
       :rows="rows"
-      :placeholder="placeholder"
+      :placeholder="placeholder && stripGlyphs(placeholder)"
       :disabled="disabled"
       :aria-invalid="!!error || undefined"
       :aria-describedby="error || hint ? `${id}-note` : undefined"
@@ -44,13 +47,13 @@ const id = useId()
       v-model="value"
       class="control"
       :type="type"
-      :placeholder="placeholder"
+      :placeholder="placeholder && stripGlyphs(placeholder)"
       :disabled="disabled"
       :aria-invalid="!!error || undefined"
       :aria-describedby="error || hint ? `${id}-note` : undefined"
     />
     <p v-if="error || hint" :id="`${id}-note`" class="note" :role="error ? 'alert' : undefined">
-      {{ error || hint }}
+      <IconText :text="error || hint || ''" />
     </p>
   </div>
 </template>

@@ -86,7 +86,7 @@ const weather: CommandSpec = {
   summary: 'Virtual weather',
   run(ctx) {
     const { weather: w, osName } = ctx.content
-    ctx.out.print(`🌍 Weather in ${osName} Virtual World:`)
+    ctx.out.print(`:earth: Weather in ${osName} Virtual World:`)
     ctx.out.print(`${pick(w.conditions, ctx.random)} ${pick(w.temps, ctx.random)}°C`)
     ctx.out.print('Humidity: 42% (the answer to everything)')
     ctx.out.print('Wind: 5 km/h from the direction of productivity')
@@ -100,7 +100,7 @@ const crypto: CommandSpec = {
   group: 'fun',
   summary: 'Fake crypto prices',
   run(ctx) {
-    ctx.out.print('💰 Crypto Prices (Totally Real™):')
+    ctx.out.print(':money: Crypto Prices (Totally Real™):')
     ctx.out.print()
     for (const coin of ctx.content.crypto) {
       const price = ctx.random() * coin.spread + coin.min
@@ -111,7 +111,7 @@ const crypto: CommandSpec = {
       ])
     }
     ctx.out.print()
-    ctx.out.print('Disclaimer: These prices are as real as unicorns! 🦄', 'yellow')
+    ctx.out.print('Disclaimer: These prices are as real as unicorns! :unicorn:', 'yellow')
   },
 }
 
@@ -127,12 +127,12 @@ const hack: CommandSpec = {
 }
 
 const RAINBOW: [Tone, string][] = [
-  ['red', '🔴'],
-  ['yellow', '🟠'],
-  ['yellow', '🟡'],
-  ['green', '🟢'],
-  ['blue', '🔵'],
-  ['magenta', '🟣'],
+  ['red', ':dot:'],
+  ['yellow', ':dot:'],
+  ['yellow', ':dot:'],
+  ['green', ':dot:'],
+  ['blue', ':dot:'],
+  ['magenta', ':dot:'],
 ]
 
 const rainbow: CommandSpec = {

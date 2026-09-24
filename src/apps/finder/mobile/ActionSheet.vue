@@ -5,6 +5,7 @@ import type { Component } from 'vue'
 
 import { tags, type TagColor } from '@/content/files'
 import { exit, spring } from '@/design/motion'
+import IconText from '@/ui/IconText.vue'
 
 import { TAG_TOKENS } from '../locations'
 
@@ -59,8 +60,8 @@ function choose(id: string) {
     >
       <div class="card overflow-clip rounded-sheet bg-ios-bg-tertiary">
         <header v-if="title || message" class="border-b border-ios-separator px-4 py-3 text-center">
-          <p v-if="title" class="truncate text-ios-footnote font-semibold text-ios-label-secondary">{{ title }}</p>
-          <p v-if="message" class="text-ios-footnote text-ios-label-secondary">{{ message }}</p>
+          <p v-if="title" class="truncate text-ios-footnote font-semibold text-ios-label-secondary"><IconText :text="title" /></p>
+          <p v-if="message" class="text-ios-footnote text-ios-label-secondary"><IconText :text="message" /></p>
         </header>
         <div v-if="tagColors" class="flex justify-center gap-3 border-b border-ios-separator py-3" role="group" aria-label="Tags">
           <button

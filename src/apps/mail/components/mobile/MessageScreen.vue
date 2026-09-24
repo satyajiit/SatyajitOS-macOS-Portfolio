@@ -14,6 +14,7 @@ import { computed } from 'vue'
 
 import { mailboxCopy } from '@/content/mail'
 import IosNavBar from '@/ui/mobile/IosNavBar.vue'
+import IconText from '@/ui/IconText.vue'
 
 import { fullDate } from '../../format'
 import { useMailStore } from '../../store'
@@ -71,7 +72,7 @@ const junkAction = computed(() => {
 
       <article v-if="message" :key="message.id" class="select-text px-4">
         <header class="flex items-center gap-3 border-b border-ios-separator py-3">
-          <MailAvatar :name="message.from.name" :address="message.from.address" :size="40" />
+          <MailAvatar :name="message.from.name" :address="message.from.address" :brand="message.from.brand" :size="40" />
           <div class="min-w-0 flex-1">
             <div class="flex items-baseline gap-2">
               <span class="min-w-0 flex-1 truncate text-ios-headline text-ios-label">
@@ -88,12 +89,12 @@ const junkAction = computed(() => {
             </p>
           </div>
         </header>
-        <h1 class="pt-3 text-ios-title-3 font-semibold text-ios-label">{{ message.subject }}</h1>
+        <h1 class="pt-3 text-ios-title-3 font-semibold text-ios-label"><IconText :text="message.subject" /></h1>
         <p class="pt-0.5 text-ios-footnote text-ios-label-secondary">
           {{ fullDate(message.receivedAt) }} · {{ message.tag }}
         </p>
         <div class="body whitespace-pre-wrap pt-4 text-ios-body text-ios-label">
-          {{ message.body }}
+          <IconText :text="message.body" />
         </div>
       </article>
     </div>

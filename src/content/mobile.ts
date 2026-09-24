@@ -41,24 +41,24 @@ export interface SeedNotification {
 export const seedNotifications: SeedNotification[] = [
   {
     title: 'Welcome to SatyajitOS',
-    body: 'Your innovative mobile experience starts here! 🚀',
+    body: 'Your innovative mobile experience starts here! :rocket:',
     minutesAgo: 2,
   },
   {
     title: 'Coffee Break Reminder',
-    body: 'Time for some virtual coffee! ☕ (Still working on real coffee delivery)',
+    body: 'Time for some virtual coffee! :coffee: (Still working on real coffee delivery)',
     app: 'coffee',
     minutesAgo: 5,
   },
   {
     title: 'System Update',
-    body: 'Innovation level increased by 42%! 📈',
+    body: 'Innovation level increased by 42%! :trending:',
     app: 'settings',
     minutesAgo: 10,
   },
   {
-    title: 'Portfolio Achievement Unlocked! 🏆',
-    body: "You've successfully created both desktop AND mobile versions! The multiverse is impressed. 🌌",
+    title: 'Portfolio Achievement Unlocked! :trophy:',
+    body: "You've successfully created both desktop AND mobile versions! The multiverse is impressed. :galaxy:",
     minutesAgo: 15,
   },
 ]
@@ -104,42 +104,42 @@ export const notificationCentre = {
   ],
   /** Posted after tapping a notification that doesn't belong to an app. */
   tapReplies: [
-    'Notification acknowledged! 📱',
-    'Message received loud and clear! 📢',
-    'Tapping into the notification matrix... 🔮',
-    'Notification processed successfully! ✅',
-    "You've been notified that you clicked a notification! 🤯",
+    'Notification acknowledged! :phone:',
+    'Message received loud and clear! :megaphone:',
+    'Tapping into the notification matrix... :crystal-ball:',
+    'Notification processed successfully! :done:',
+    "You've been notified that you clicked a notification! :mind-blown:",
   ],
   tapReplyTitle: 'Notification System',
   demos: [
     {
-      title: 'Innovation Alert! 🚀',
+      title: 'Innovation Alert! :rocket:',
       body: 'New breakthrough idea detected in your brain! Patent pending...',
       app: 'settings',
     },
     {
-      title: 'Coffee Status Update ☕',
+      title: 'Coffee Status Update :coffee:',
       body: 'Caffeine levels critically low. Productivity may suffer!',
       app: 'coffee',
     },
-    { title: 'Genius Mode Activated 🧠', body: 'Your IQ just increased by 42 points! (Results may vary)' },
-    { title: 'Time Travel Request 🕰️', body: 'Someone wants to borrow your DeLorean. Again.' },
-    { title: 'Motivation Boost 💪', body: "You're doing amazing! Keep being awesome!" },
+    { title: 'Genius Mode Activated :brain:', body: 'Your IQ just increased by 42 points! (Results may vary)' },
+    { title: 'Time Travel Request :clock:', body: 'Someone wants to borrow your DeLorean. Again.' },
+    { title: 'Motivation Boost :strong:', body: "You're doing amazing! Keep being awesome!" },
   ] as { title: string; body: string; app?: AppId }[],
   markedRead: {
     title: 'Notification Center',
-    body: 'All notifications marked as read! Your inbox is now zen. 🧘‍♂️',
+    body: 'All notifications marked as read! Your inbox is now zen. :zen:',
   },
   snoozed: {
     title: 'Snooze Master',
-    body: (count: number) => `Snoozed ${count} notifications. They'll be back... eventually. 😴`,
+    body: (count: number) => `Snoozed ${count} notifications. They'll be back... eventually. :sleepy:`,
   },
   mood: [
-    { below: 1, value: { emoji: '😌', hint: 'Zen master level achieved' } },
-    { below: 3, value: { emoji: '😊', hint: 'Manageable chaos' } },
-    { below: 6, value: { emoji: '😐', hint: 'Getting a bit crowded' } },
-    { below: 11, value: { emoji: '😰', hint: 'Notification overload incoming' } },
-    { below: Infinity, value: { emoji: '🤯', hint: 'Digital avalanche detected!' } },
+    { below: 1, value: { emoji: ':smile:', hint: 'Zen master level achieved' } },
+    { below: 3, value: { emoji: ':smile:', hint: 'Manageable chaos' } },
+    { below: 6, value: { emoji: ':meh:', hint: 'Getting a bit crowded' } },
+    { below: 11, value: { emoji: ':anxious:', hint: 'Notification overload incoming' } },
+    { below: Infinity, value: { emoji: ':mind-blown:', hint: 'Digital avalanche detected!' } },
   ] as Threshold<{ emoji: string; hint: string }>[],
   distraction: [
     { below: 1, value: { level: 'Minimal', hint: 'Focus mode: activated' } },
@@ -182,7 +182,7 @@ export const controlCentre = {
     ] as Threshold[],
     /** Replaces the percentage at the extremes. */
     reading: (level: number) =>
-      level === 0 ? '🌚' : level === 100 ? '☀️' : level < 30 ? '🌙' : `${Math.round(level)}%`,
+      level === 0 ? ':moon:' : level === 100 ? ':sun:' : level < 30 ? ':moon:' : `${Math.round(level)}%`,
   },
   volume: {
     label: [
@@ -190,16 +190,16 @@ export const controlCentre = {
       { below: 20, value: 'Library Mode' },
       { below: 50, value: 'Indoor Voice' },
       { below: 80, value: 'Confident' },
-      { below: Infinity, value: 'Party Mode! 🎉' },
+      { below: Infinity, value: 'Party Mode! :party:' },
     ] as Threshold[],
     hint: [
       { below: 1, value: 'Shh... ninja mode activated' },
       { below: 30, value: 'Perfect for late-night coding' },
       { below: 70, value: 'Just right for focus' },
-      { below: 90, value: 'Getting spicy! 🌶️' },
+      { below: 90, value: 'Getting spicy! :spicy:' },
       { below: Infinity, value: 'RIP AirPods users' },
     ] as Threshold[],
-    reading: (level: number) => (level === 0 ? '🔇' : level === 100 ? '💯' : `${Math.round(level)}%`),
+    reading: (level: number) => (level === 0 ? ':mute:' : level === 100 ? ':hundred:' : `${Math.round(level)}%`),
   },
   /** The second page of modules: the ones Apple forgot to ship. */
   extras: {
@@ -207,11 +207,11 @@ export const controlCentre = {
     productivity: {
       label: 'Productivity Level',
       emoji: [
-        { below: 20, value: '😴' },
-        { below: 40, value: '🐌' },
-        { below: 60, value: '🚶' },
-        { below: 80, value: '🏃' },
-        { below: Infinity, value: '🚀' },
+        { below: 20, value: ':sleepy:' },
+        { below: 40, value: ':snail:' },
+        { below: 60, value: ':walk:' },
+        { below: 80, value: ':run:' },
+        { below: Infinity, value: ':rocket:' },
       ] as Threshold[],
       hint: [
         { below: 20, value: "Maybe it's nap time?" },
@@ -224,11 +224,11 @@ export const controlCentre = {
     caffeine: {
       label: 'Caffeine Level',
       emoji: [
-        { below: 20, value: '😵' },
-        { below: 40, value: '😪' },
-        { below: 60, value: '😐' },
-        { below: 80, value: '😊' },
-        { below: Infinity, value: '🤯' },
+        { below: 20, value: ':dizzy-face:' },
+        { below: 40, value: ':sleepy:' },
+        { below: 60, value: ':meh:' },
+        { below: 80, value: ':smile:' },
+        { below: Infinity, value: ':mind-blown:' },
       ] as Threshold[],
       hint: [
         { below: 20, value: 'Emergency coffee required!' },
@@ -241,11 +241,11 @@ export const controlCentre = {
     codeQuality: {
       label: 'Code Quality',
       emoji: [
-        { below: 20, value: '💩' },
-        { below: 40, value: '🤔' },
-        { below: 60, value: '👍' },
-        { below: 80, value: '✨' },
-        { below: Infinity, value: '🏆' },
+        { below: 20, value: ':poop:' },
+        { below: 40, value: ':thinking:' },
+        { below: 60, value: ':thumbs-up:' },
+        { below: 80, value: ':sparkles:' },
+        { below: Infinity, value: ':trophy:' },
       ] as Threshold[],
       hint: [
         { below: 20, value: 'Time to refactor... everything' },

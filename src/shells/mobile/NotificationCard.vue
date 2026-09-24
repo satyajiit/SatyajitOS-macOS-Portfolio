@@ -9,6 +9,8 @@ import { notificationCentre as copy, pickRandom } from '@/content/mobile'
 import { spring } from '@/design/motion'
 import type { NotificationAction, OsNotification } from '@/stores/notifications'
 import UiAppIcon from '@/ui/UiAppIcon.vue'
+import IconText from '@/ui/IconText.vue'
+import { stripGlyphs } from '@/ui/glyphs/text'
 
 import { createVelocityTracker, project, rubberband } from './gestures'
 import { relativeTime } from './useClock'
@@ -88,7 +90,7 @@ const style = computed(() => (props.swipe === 'left' ? { x: offset } : { y: offs
     :class="swipe === 'left' ? 'touch-pan-y' : 'touch-none'"
     role="button"
     tabindex="0"
-    :aria-label="`${appName}: ${notification.title}. ${notification.body}`"
+    :aria-label="stripGlyphs(`${appName}: ${notification.title}. ${notification.body}`)"
     @pointerdown="onDown"
     @pointermove="onMove"
     @pointerup="onUp"
@@ -100,10 +102,10 @@ const style = computed(() => (props.swipe === 'left' ? { x: offset } : { y: offs
     <UiAppIcon :name="icon" :size="38" :shadow="false" class="mt-0.5" />
     <div class="min-w-0 flex-1">
       <div class="flex items-baseline gap-2">
-        <h3 class="min-w-0 flex-1 truncate text-ios-subheadline font-semibold">{{ notification.title }}</h3>
+        <h3 class="min-w-0 flex-1 truncate text-ios-subheadline font-semibold"><IconText :text="notification.title" /></h3>
         <time class="shrink-0 text-ios-footnote text-ios-label-secondary">{{ when }}</time>
       </div>
-      <p class="line-clamp-4 text-ios-subheadline">{{ notification.body }}</p>
+      <p class="line-clamp-4 text-ios-subheadline"><IconText :text="notification.body" /></p>
       <div v-if="notification.actions?.length" class="mt-2 flex flex-wrap gap-2">
         <button
           v-for="action in notification.actions"

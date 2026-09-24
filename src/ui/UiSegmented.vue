@@ -1,9 +1,12 @@
 <script setup lang="ts" generic="T extends string">
+import Glyph from './glyphs/Glyph.vue'
+import type { GlyphName } from './glyphs/registry'
+
 /** Segmented control (view switchers, filters). Arrow keys move the selection. */
 const selected = defineModel<T>({ required: true })
 const props = withDefaults(
   defineProps<{
-    options: { value: T; label: string }[]
+    options: { value: T; label: string; icon?: GlyphName }[]
     label: string
     platform?: 'mac' | 'ios'
     disabled?: boolean
@@ -38,17 +41,18 @@ function step(dir: 1 | -1) {
       :disabled="disabled"
       @click="selected = option.value"
     >
-      {{ option.label }}
+      <Glyph v-if="option.icon" :name="option.icon" :tinted="false" class="mr-1" />{{ option.label }}
     </button>
   </div>
 </template>
 
 <style scoped>
 .segmented {
-  /* Equal columns sized to the widest label, like NSSegmentedControl */
+  /* Equal columns sized to the widest label, like NSSegmentedControl. A column
+     never shrinks below its own label, so a tight container can't squash one. */
   display: inline-grid;
   grid-auto-flow: column;
-  grid-auto-columns: 1fr;
+  grid-auto-columns: minmax(max-content, 1fr);
   padding: 2px;
   gap: 2px;
   border-radius: 7px;
@@ -59,7 +63,6 @@ function step(dir: 1 | -1) {
   background: var(--ios-fill-tertiary);
 }
 .segment {
-  min-width: 0;
   height: 20px;
   padding: 0 10px;
   border-radius: 5px;

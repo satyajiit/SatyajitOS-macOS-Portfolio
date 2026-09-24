@@ -1,3 +1,6 @@
+import type { BrandName } from '@/ui/brand/registry'
+import type { GlyphName } from '@/ui/glyphs/registry'
+
 /**
  * About Me: everything the About app shows, on both the Mac and the phone.
  * Name, role, location, links and photo come from ./profile.ts.
@@ -6,6 +9,11 @@
 /** Icon keys map to SF Symbol stand-ins inside the app (see apps/about/icons.ts). */
 export type AboutIcon =
   'rocket' | 'trophy' | 'gem' | 'award' | 'hammer' | 'star' | 'zap' | 'chart' | 'dollar'
+
+export interface TechItem {
+  label: string
+  brand?: BrandName
+}
 
 export interface Spec {
   label: string
@@ -28,7 +36,7 @@ export interface Metric {
 }
 
 export interface FunFact {
-  emoji: string
+  icon: GlyphName
   text: string
 }
 
@@ -72,12 +80,12 @@ export const highlights: Highlight[] = [
   { title: 'Hidden Gem', detail: 'Google Play Store', icon: 'gem', tint: 'blue' },
   { title: 'AppScale Academy', detail: 'Google certified', icon: 'award', tint: 'purple' },
   { title: 'Product Builder', detail: 'Love creating solutions', icon: 'hammer', tint: 'green' },
-  { title: '4.8★ Rating', detail: 'App Store', icon: 'star', tint: 'pink' },
+  { title: '4.8:star: Rating', detail: 'App Store', icon: 'star', tint: 'pink' },
 ]
 
 export const metrics: Metric[] = [
   { value: '50K+', label: 'Merchants Onboarded' },
-  { value: '4.8★', label: 'App Store Rating' },
+  { value: '4.8:star:', label: 'App Store Rating' },
   { value: '∞', label: 'Coffee Cups' },
   { value: '99.9%', label: 'Uptime' },
 ]
@@ -121,55 +129,56 @@ export const milestones: Highlight[] = [
   },
 ]
 
+/** Brand logos come from svgl (see src/ui/brand); items without one show a generic glyph. */
 export const techStack = {
   languages: {
     title: 'Languages & Frameworks',
     items: [
-      'TypeScript',
-      'JavaScript',
-      'Go',
-      'Java',
-      'Kotlin',
-      'Python',
-      'Vue.js',
-      'React',
-      'Next.js',
-      'Node.js',
-      'Express.js',
-      'Flutter',
-      'Android',
-      'KMP',
+      { label: 'TypeScript', brand: 'typescript' },
+      { label: 'JavaScript', brand: 'javascript' },
+      { label: 'Go', brand: 'go' },
+      { label: 'Java', brand: 'java' },
+      { label: 'Kotlin', brand: 'kotlin' },
+      { label: 'Python', brand: 'python' },
+      { label: 'Vue.js', brand: 'vue' },
+      { label: 'React', brand: 'react' },
+      { label: 'Next.js', brand: 'nextjs' },
+      { label: 'Node.js', brand: 'nodejs' },
+      { label: 'Express.js', brand: 'express' },
+      { label: 'Flutter', brand: 'flutter' },
+      { label: 'Android', brand: 'android' },
+      { label: 'KMP', brand: 'kotlin' },
     ],
   },
   tools: {
     title: 'Databases & Tools',
     items: [
-      'MySQL',
-      'MongoDB',
-      'PostgreSQL',
-      'RealmDB',
-      'ObjectBox',
-      'Redis',
-      'Docker',
-      'Kubernetes',
-      'Firebase',
-      'GraphQL',
-      'AWS',
-      'GCP',
-      'Git',
-      'Figma',
-      'Tailwind CSS',
+      { label: 'MySQL', brand: 'mysql' },
+      { label: 'MongoDB', brand: 'mongodb' },
+      { label: 'PostgreSQL', brand: 'postgresql' },
+      { label: 'RealmDB' },
+      { label: 'ObjectBox' },
+      { label: 'Redis', brand: 'redis' },
+      { label: 'Docker', brand: 'docker' },
+      { label: 'Kubernetes', brand: 'kubernetes' },
+      { label: 'Firebase', brand: 'firebase' },
+      { label: 'GraphQL', brand: 'graphql' },
+      { label: 'AWS', brand: 'aws' },
+      { label: 'GCP', brand: 'google-cloud' },
+      { label: 'Git', brand: 'git' },
+      { label: 'Figma', brand: 'figma' },
+      { label: 'Tailwind CSS', brand: 'tailwind' },
     ],
   },
-}
+} satisfies Record<string, { title: string; items: TechItem[] }>
 
 export const funFacts: FunFact[] = [
-  { emoji: '🏎️', text: 'F1 junkie - building a watch face inspired by DRS zones soon' },
-  { emoji: '🤖', text: "Once tried teaching my smart fan to detect code bugs (it didn't go well)" },
-  { emoji: '🍱', text: 'My code commits usually spike after biryani' },
-  { emoji: '☕', text: 'Coffee consumption directly correlates with code quality' },
-  { emoji: '🚀', text: 'Built ZyadaShop in 15-second store creation time (yes, really!)' },
-  { emoji: '🎯', text: "Democratizing tech - if it doesn't scale, I probably won't sleep" },
+  { icon: 'race-car', text: 'F1 junkie - building a watch face inspired by DRS zones soon' },
+  { icon: 'robot', text: "Once tried teaching my smart fan to detect code bugs (it didn't go well)" },
+  { icon: 'bento', text: 'My code commits usually spike after biryani' },
+  { icon: 'coffee', text: 'Coffee consumption directly correlates with code quality' },
+  { icon: 'rocket', text: 'Built ZyadaShop in 15-second store creation time (yes, really!)' },
+  { icon: 'target', text: "Democratizing tech - if it doesn't scale, I probably won't sleep" },
 ]
 
 export const philosophy = {

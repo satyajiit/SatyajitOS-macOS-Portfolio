@@ -11,7 +11,7 @@ import {
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
 import { finderCopy, sidebar, tags, type TagColor } from '@/content/files'
-import { UiIconButton, UiSearchField, UiSegmented, UiSidebarItem, UiSidebarSection, UiSlider } from '@/ui'
+import { IconText, UiIconButton, UiSearchField, UiSegmented, UiSidebarItem, UiSidebarSection, UiSlider } from '@/ui'
 import { useWindowContext, WindowSidebar, WindowToolbar } from '@/ui/window'
 
 import FinderContextMenu, { type ContextAction } from './components/FinderContextMenu.vue'
@@ -461,7 +461,7 @@ onMounted(() => {
         </template>
       </nav>
       <footer class="chrome flex h-6 shrink-0 items-center gap-3 border-t border-separator px-3 text-subheadline text-label-secondary">
-        <span class="min-w-0 flex-1 truncate text-center">{{ status }}</span>
+        <span class="min-w-0 flex-1 truncate text-center"><IconText :text="status" /></span>
         <div v-if="finder.viewMode === 'icons' && !state" class="w-20 shrink-0">
           <UiSlider v-model="iconSize" label="Icon size" :min="40" :max="112" :step="8" />
         </div>

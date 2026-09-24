@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion-v'
 import { computed, nextTick, ref, watch } from 'vue'
 
 import { exit, spring } from '@/design/motion'
-import { UiButton, UiIconButton } from '@/ui'
+import { IconText, UiButton, UiIconButton } from '@/ui'
 
 import { funStatsOf, kindLabel, kindQuipOf, openWithApp, quipOf, type Item } from '../fs'
 
@@ -86,9 +86,9 @@ function onKey(event: KeyboardEvent) {
               <template v-if="item.modified"> · Modified {{ item.modified }}</template>
               <template v-if="item.tags?.length"> · {{ item.tags.join(', ') }}</template>
             </p>
-            <p v-if="item.description || item.tooltip" class="text-label">{{ item.description || item.tooltip }}</p>
+            <p v-if="item.description || item.tooltip" class="text-label"><IconText :text="item.description || item.tooltip" /></p>
             <p v-if="item.kind !== 'folder'" class="text-label-secondary">
-              {{ kindQuipOf(item) }} — {{ quipOf(item) }}
+              <IconText :text="kindQuipOf(item)" /> — <IconText :text="quipOf(item)" />
             </p>
             <p v-if="stats" class="tabular text-label-secondary">
               Satyajit's metadata: importance {{ stats.importance }} · {{ stats.coffee }} cups of coffee ·

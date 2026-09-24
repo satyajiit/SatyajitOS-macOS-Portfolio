@@ -37,6 +37,8 @@ export const site = {
 
 Everything is typed, so `npm run type-check` catches a missing field before a visitor does.
 
+Need a symbol in your copy? Write a glyph code such as `:rocket:`, `:coffee:` or `:sparkles:`; the full list is in `src/ui/glyphs/registry.ts`. Please don't paste emoji: the UI renders the codes as proper icons. Social links, tech-stack chips and verified mail senders can also name a brand logo (`brand: 'github'`), picked from `src/ui/brand/registry.ts`. To add a new brand, import it from `@selemondev/svgl-vue` and register it there.
+
 ## 4. Add or remove an app
 
 Apps are listed once in [`src/apps/registry.ts`](../src/apps/registry.ts), in Dock order. Each entry points at a desktop component (rendered inside a macOS window) and/or a mobile component (rendered full-screen on the phone):

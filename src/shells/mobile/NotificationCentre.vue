@@ -7,6 +7,7 @@ import { notificationCentre as copy, pickBelow, pickRandom } from '@/content/mob
 import { spring } from '@/design/motion'
 import { useMobileStore } from '@/stores/mobile'
 import { useNotificationsStore, type OsNotification } from '@/stores/notifications'
+import IconText from '@/ui/IconText.vue'
 
 import NotificationCard from './NotificationCard.vue'
 import PanelGrabber from './PanelGrabber.vue'
@@ -84,18 +85,18 @@ const { y, onDown, onMove, onUp } = usePanelDrag(() => store.closePanel())
         <div class="mt-3 grid grid-cols-2 gap-2.5" aria-label="Lock Screen widgets">
           <section class="widget material-ios-platter">
             <p class="text-ios-caption-2 font-semibold uppercase opacity-70">Notification Mood</p>
-            <p class="text-ios-subheadline font-semibold">{{ mood.emoji }} {{ mood.hint }}</p>
+            <p class="text-ios-subheadline font-semibold"><IconText :text="mood.emoji" /> <IconText :text="mood.hint" /></p>
           </section>
           <section class="widget material-ios-platter">
             <p class="text-ios-caption-2 font-semibold uppercase opacity-70">Distraction Level</p>
-            <p class="text-ios-subheadline font-semibold">{{ distraction.level }} · {{ distraction.hint }}</p>
+            <p class="text-ios-subheadline font-semibold"><IconText :text="distraction.level" /> · <IconText :text="distraction.hint" /></p>
           </section>
         </div>
 
         <div class="mb-2.5 mt-7 flex items-end justify-between gap-3">
           <div class="min-w-0">
             <h2 class="text-ios-title-3 font-bold">Notification Centre</h2>
-            <p class="truncate text-ios-footnote opacity-70">{{ subtitle }}</p>
+            <p class="truncate text-ios-footnote opacity-70"><IconText :text="subtitle" /></p>
           </div>
           <button
             v-if="count"
@@ -132,7 +133,7 @@ const { y, onDown, onMove, onUp } = usePanelDrag(() => store.closePanel())
         <div v-if="!count" class="flex flex-col items-center gap-2 py-10 text-center opacity-80">
           <BellOff class="size-7" aria-hidden="true" />
           <p class="text-ios-headline">No Notifications</p>
-          <p class="text-ios-footnote opacity-80">{{ emptyMessage }}</p>
+          <p class="text-ios-footnote opacity-80"><IconText :text="emptyMessage" /></p>
         </div>
 
         <div class="mt-5 flex flex-wrap justify-center gap-2 pb-24">

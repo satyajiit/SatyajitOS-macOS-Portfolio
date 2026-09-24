@@ -6,7 +6,7 @@ import { settings as copy } from '@/content/mobile'
 import { usePlatform } from '@/composables/usePlatform'
 import { useAnalytics } from '@/composables/useAnalytics'
 import { useMobileStore } from '@/stores/mobile'
-import { IosButton, UiListGroup } from '@/ui'
+import { IconText, IosButton, UiListGroup } from '@/ui'
 
 import SettingsPage from '../SettingsPage.vue'
 
@@ -34,7 +34,7 @@ async function install() {
 <template>
   <SettingsPage title="Add to Home Screen">
     <p class="px-8 pb-6 pt-2 text-center text-ios-subheadline text-ios-label-secondary">
-      {{ isStandalone ? copy.addToHomeScreen.installed : copy.addToHomeScreen.intro }}
+      <IconText :text="isStandalone ? copy.addToHomeScreen.installed : copy.addToHomeScreen.intro" />
     </p>
 
     <UiListGroup v-if="store.installPrompt || state === 'success'">
@@ -48,7 +48,7 @@ async function install() {
     <UiListGroup v-if="!isStandalone" header="On iPhone or iPad">
       <li v-for="(step, i) in copy.addToHomeScreen.steps" :key="step" class="step">
         <span class="num tabular">{{ i + 1 }}</span>
-        <span class="flex-1 text-ios-body text-ios-label">{{ step }}</span>
+        <span class="flex-1 text-ios-body text-ios-label"><IconText :text="step" /></span>
         <Share v-if="i === 1" class="size-5 text-accent" aria-hidden="true" />
         <SquarePlus v-if="i === 2" class="size-5 text-ios-label" aria-hidden="true" />
       </li>

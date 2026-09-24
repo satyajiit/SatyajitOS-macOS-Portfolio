@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 
+import { BrandIcon, brands, Glyph, glyphs, type BrandName, type GlyphName } from '@/ui'
 import { appIcons } from '@/ui/app-icons'
 
 const appearance = ref<'dark' | 'light'>('dark')
@@ -11,6 +12,8 @@ watchEffect(() => {
   else document.documentElement.dataset.accent = accent.value
 })
 
+const glyphNames = Object.keys(glyphs) as GlyphName[]
+const brandNames = Object.keys(brands) as BrandName[]
 const accents = ['blue', 'purple', 'pink', 'red', 'orange', 'yellow', 'green', 'graphite']
 const system = ['red', 'orange', 'yellow', 'green', 'mint', 'teal', 'cyan', 'blue', 'indigo', 'purple', 'pink', 'brown', 'gray']
 const labels = ['label', 'label-secondary', 'label-tertiary', 'label-quaternary']
@@ -42,6 +45,23 @@ const materials = ['material-menu', 'material-popover', 'material-sidebar', 'mat
           </div>
           <span class="text-callout text-label-secondary">{{ name }}</span>
         </div>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="mb-4 text-title-2">Brand logos (svgl)</h2>
+      <div class="flex flex-wrap gap-5">
+        <div v-for="b in brandNames" :key="b" class="flex w-20 flex-col items-center gap-1 text-label">
+          <BrandIcon :name="b" :size="32" />
+          <span class="text-footnote text-label-secondary">{{ b }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="mb-4 text-title-2">Glyphs</h2>
+      <div class="flex flex-wrap gap-3 text-title-2">
+        <span v-for="n in glyphNames" :key="n" :title="n"><Glyph :name="n" /></span>
       </div>
     </section>
 

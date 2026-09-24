@@ -9,6 +9,7 @@ import UiMenu from '@/ui/UiMenu.vue'
 import UiMenuItem from '@/ui/UiMenuItem.vue'
 import UiMenuSeparator from '@/ui/UiMenuSeparator.vue'
 import UiSwitch from '@/ui/UiSwitch.vue'
+import IconText from '@/ui/IconText.vue'
 
 import BrandGlyph from '../BrandGlyph.vue'
 import { closeMenus, shellUi, togglePanel } from '../shellUi'
@@ -212,7 +213,7 @@ const batteryPct = computed(() => Math.round(status.batteryLevel))
           :destructive="entry.destructive"
           @select="run(entry)"
         >
-          {{ entry.label }}
+          <IconText :text="entry.label" />
         </UiMenuItem>
       </template>
     </UiMenu>

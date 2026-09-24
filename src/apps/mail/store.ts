@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { stripGlyphs } from '@/ui/glyphs/text'
 
 import {
   deliveries,
@@ -40,10 +41,11 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export const isEmail = (value: string) => EMAIL.test(value.trim())
 
-/** First ~140 characters of the body on one line, for list rows. */
+/** First ~140 characters of the body on one line, for list rows. Never cuts a :glyph: in half. */
 export function previewOf(body: string): string {
   const flat = body.replace(/\s+/g, ' ').trim()
-  return flat.length > 140 ? `${flat.slice(0, 140).trimEnd()}…` : flat
+  if (flat.length <= 140) return flat
+  return `${flat.slice(0, 140).replace(/:[a-z0-9-]*$/, '').trimEnd()}…`
 }
 
 function toMessage(seed: Omit<MailSeed, 'ageMinutes'>, receivedAt: number): MailMessage {
@@ -111,7 +113,7 @@ export const useMailStore = defineStore('mail', () => {
     const list = q
       ? inView.value.filter((m) =>
           [m.subject, m.from.name, m.from.address, m.to.name, m.body].some((field) =>
-            field.toLowerCase().includes(q),
+            stripGlyphs(field).toLowerCase().includes(q),
           ),
         )
       : inView.value
@@ -193,11 +195,13 @@ export const useMailStore = defineStore('mail', () => {
     const message = find(id)
     if (!message) return { to: '', subject: '', body: '' }
     const outgoing = message.mailbox === 'sent'
-    const subject = /^re:/i.test(message.subject) ? message.subject : `Re: ${message.subject}`
+    // Drafts land in plain text fields, so symbols go back to words-only.
+    const original = stripGlyphs(message.subject)
+    const subject = /^re:/i.test(original) ? original : `Re: ${original}`
     return {
       to: outgoing ? message.to.address : message.from.address,
       subject,
-      body: `\n\n--- Original Message ---\nFrom: ${message.from.name} <${message.from.address}>\nSubject: ${message.subject}\n\n${message.body}`,
+      body: `\n\n--- Original Message ---\nFrom: ${message.from.name} <${message.from.address}>\nSubject: ${original}\n\n${stripGlyphs(message.body)}`,
     }
   }
 

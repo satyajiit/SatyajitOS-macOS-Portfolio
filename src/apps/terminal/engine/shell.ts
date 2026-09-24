@@ -158,12 +158,12 @@ export class Shell implements ShellApi {
 
   private notFound(name: string, out: Output): number {
     out.error(pick(this.content.notFound, this.random).replaceAll('{cmd}', name))
-    out.print("💡 Type 'help' to see available commands")
-    out.print('🎲 Or try some fun commands: cowsay, fortune, joke, matrix!')
+    out.print(":idea: Type 'help' to see available commands")
+    out.print(':dice: Or try some fun commands: cowsay, fortune, joke, matrix!')
     const closest = COMMANDS.map((c) => ({ name: c.name, d: distance(name.toLowerCase(), c.name) }))
       .filter((c) => c.d <= 2)
       .sort((a, b) => a.d - b.d)[0]
-    out.print(`🤔 Did you mean: ${closest?.name ?? 'help'}?`)
+    out.print(`:thinking: Did you mean: ${closest?.name ?? 'help'}?`)
     return 127
   }
 

@@ -20,7 +20,7 @@ import { useAppearanceStore } from '@/stores/appearance'
 import { useMobileStore } from '@/stores/mobile'
 import { useNotificationsStore } from '@/stores/notifications'
 import { usePWAStore } from '@/stores/pwa'
-import { UiBadge, UiListGroup, UiListRow, UiSwitch } from '@/ui'
+import { IconText, UiBadge, UiListGroup, UiListRow, UiSwitch } from '@/ui'
 
 import SettingsPage from '../SettingsPage.vue'
 import { useSettingsNav } from '../navigation'
@@ -49,7 +49,7 @@ const dark = computed({
           <img :src="profile.avatar" alt="" class="size-[60px] shrink-0 rounded-full object-cover" />
           <span class="flex min-w-0 flex-1 flex-col text-left">
             <span class="truncate text-ios-title-3 text-ios-label">{{ profile.name }}</span>
-            <span class="truncate text-ios-footnote text-ios-label-secondary">{{ copy.profileSubtitle }}</span>
+            <span class="truncate text-ios-footnote text-ios-label-secondary"><IconText :text="copy.profileSubtitle" /></span>
           </span>
           <ChevronRight class="size-4 shrink-0 text-ios-label-tertiary" style="stroke-width: 2.5" aria-hidden="true" />
         </button>

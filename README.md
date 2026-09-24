@@ -250,7 +250,17 @@ flowchart LR
 
 ### Built with
 
-[Vue 3](https://vuejs.org) · [Vite 8](https://vite.dev) · [Pinia](https://pinia.vuejs.org) · [Vue Router](https://router.vuejs.org) · [Tailwind CSS 4](https://tailwindcss.com) · [motion-v](https://motion.dev/docs/vue) · [Lucide](https://lucide.dev) (standing in for SF Symbols) · [Inter](https://rsms.me/inter/) (standing in for SF Pro off Apple devices) · [vite-plugin-pwa](https://vite-pwa-org.netlify.app) · [Vitest](https://vitest.dev) · [Playwright](https://playwright.dev) (for the README media)
+<p>
+  <a href="https://vuejs.org"><img src="https://svgl.app/library/vue.svg" alt="Vue" height="28" /></a>&nbsp;&nbsp;
+  <a href="https://vite.dev"><img src="https://svgl.app/library/vite.svg" alt="Vite" height="28" /></a>&nbsp;&nbsp;
+  <a href="https://www.typescriptlang.org"><img src="https://svgl.app/library/typescript.svg" alt="TypeScript" height="28" /></a>&nbsp;&nbsp;
+  <a href="https://tailwindcss.com"><img src="https://svgl.app/library/tailwindcss.svg" alt="Tailwind CSS" height="28" /></a>&nbsp;&nbsp;
+  <a href="https://pinia.vuejs.org"><img src="https://svgl.app/library/pinia.svg" alt="Pinia" height="28" /></a>&nbsp;&nbsp;
+  <a href="https://vitest.dev"><img src="https://svgl.app/library/vitest.svg" alt="Vitest" height="28" /></a>&nbsp;&nbsp;
+  <a href="https://playwright.dev"><img src="https://svgl.app/library/playwright.svg" alt="Playwright" height="28" /></a>
+</p>
+
+[Vue 3](https://vuejs.org) · [Vite 8](https://vite.dev) · [Pinia](https://pinia.vuejs.org) · [Vue Router](https://router.vuejs.org) · [Tailwind CSS 4](https://tailwindcss.com) · [motion-v](https://motion.dev/docs/vue) · [Lucide](https://lucide.dev) (standing in for SF Symbols, and for every emoji: copy writes `:rocket:` and gets a real icon) · [svgl](https://svgl.app) via [svgl-vue](https://github.com/selemondev/svgl-vue) (brand logos) · [Inter](https://rsms.me/inter/) (standing in for SF Pro off Apple devices) · [vite-plugin-pwa](https://vite-pwa-org.netlify.app) · [Vitest](https://vitest.dev) · [Playwright](https://playwright.dev) (for the README media)
 
 ## 🩺 Kernel panics (FAQ)
 

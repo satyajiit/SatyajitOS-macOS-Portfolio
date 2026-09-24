@@ -1,5 +1,6 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { stripGlyphs } from '@/ui/glyphs/text'
 
 import { deliveries, owner, seedMessages } from '@/content/mail'
 import { useNotificationsStore } from '@/stores/notifications'
@@ -100,7 +101,7 @@ describe('mail store', () => {
     const incoming = mail.visible[0]!
     const draft = mail.replyDraft(incoming.id)
     expect(draft.to).toBe(incoming.from.address)
-    expect(draft.subject).toBe(`Re: ${incoming.subject}`)
+    expect(draft.subject).toBe(`Re: ${stripGlyphs(incoming.subject)}`)
     expect(draft.body).toContain('--- Original Message ---')
 
     const sent = mail.send(draft)
@@ -169,6 +170,6 @@ describe('mail helpers', () => {
   it('makes monograms from names with emoji and punctuation', () => {
     expect(initials('Y Combinator')).toBe('YC')
     expect(initials('Prince Definitely-Not-A-Scammer')).toBe('PD')
-    expect(initials('🤖 bot')).toBe('B')
+    expect(initials(':robot: bot')).toBe('B')
   })
 })

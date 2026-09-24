@@ -4,6 +4,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { sleep as copy } from '@/content/system'
 import { useNotificationsStore } from '@/stores/notifications'
 import { useSystemStore } from '@/stores/system'
+import IconText from '@/ui/IconText.vue'
 
 /** Display asleep: black. Any key or click wakes it and reports the nap. */
 const system = useSystemStore()
@@ -46,10 +47,10 @@ onUnmounted(() => {
     @pointerdown="wake"
   >
     <div class="flex flex-col items-center gap-2 text-center">
-      <p class="text-title-3 dim-2">{{ copy.title }}</p>
-      <p class="text-body dim-1">{{ quip }}</p>
+      <p class="text-title-3 dim-2"><IconText :text="copy.title" /></p>
+      <p class="text-body dim-1"><IconText :text="quip" /></p>
       <p class="tabular text-callout dim-1">{{ elapsed }}</p>
-      <p class="mt-6 text-subheadline dim-1">{{ copy.wakeHint }}</p>
+      <p class="mt-6 text-subheadline dim-1"><IconText :text="copy.wakeHint" /></p>
     </div>
   </div>
 </template>

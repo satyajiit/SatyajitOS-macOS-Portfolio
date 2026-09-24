@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconText from '@/ui/IconText.vue'
 /** A full-width on/off module with a status word and a one-line quip below. */
 defineProps<{ label: string; emoji: string; on: boolean; onText: string; offText: string; hint: string }>()
 defineEmits<{ toggle: [] }>()
@@ -13,11 +14,11 @@ defineEmits<{ toggle: [] }>()
       :aria-pressed="on"
       @click="$emit('toggle')"
     >
-      <span class="text-ios-title-3" aria-hidden="true">{{ emoji }}</span>
-      <span class="min-w-0 flex-1 truncate text-left text-ios-subheadline font-semibold">{{ label }}</span>
-      <span class="text-ios-footnote font-semibold opacity-70">{{ on ? onText : offText }}</span>
+      <span class="text-ios-title-3" aria-hidden="true"><IconText :text="emoji" /></span>
+      <span class="min-w-0 flex-1 truncate text-left text-ios-subheadline font-semibold"><IconText :text="label" /></span>
+      <span class="text-ios-footnote font-semibold opacity-70"><IconText :text="on ? onText : offText" /></span>
     </button>
-    <p class="px-3 text-ios-caption-1 text-white/70">{{ hint }}</p>
+    <p class="px-3 text-ios-caption-1 text-white/70"><IconText :text="hint" /></p>
   </div>
 </template>
 
